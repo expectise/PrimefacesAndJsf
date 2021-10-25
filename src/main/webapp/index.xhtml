@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="es"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:p="http://primefaces.org/ui"
+  xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions">
+  
+  <h:head>
+     <meta http-equiv="X-UA-Compatible" content="IE=9" />
+     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SERPIENTE EMPLUMADA</title>
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,100,700' rel='stylesheet' type='text/css' />
+    <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../css/jquery.fancybox.css" />
+    <link rel="stylesheet" type="text/css" href="../css/jquery-ui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/owl.carousel.css" />
+    <link rel="stylesheet" type="text/css" href="../css/owl.transitions.css" />
+    <link rel="stylesheet" type="text/css" href="../css/owl.theme.css" />
+    <link rel="stylesheet" type="text/css" href="../css/jquery.mCustomScrollbar.css" />
+    <link rel="stylesheet" type="text/css" href="../css/theme.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="../css/responsive.css" media="all" />  
+   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />  
+                    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+</h:head>
+<h:body>
+<h:form id="form">
+<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+<div class="wrap">
+        <div id="header">
+            <div class="top-header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-5 col-xs-12">
+                            <div class="top-support">
+                                <ul class="list-inline">
+                                    <li><a href="#" class="top-support-link">Ayuda </a></li>
+                                    <li><a href="#" class="top-support-link">Servicios</a></li>
+                                    <li><a href="#" class="top-support-link">MX</a></li>
+                                    <li>
+                                        <a href="#" class="top-support-link"><img src="../images/spain-flag-square-icon-16.png" alt="" /></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-7 col-xs-12">
+                            <div class="top-info">
+                                <ul class="list-inline text-right">
+                                    <li><a href="#" class="top-info-link"><i class="fa fa-user"></i> Mi cuenta</a></li>
+                                    <li><a href="#" class="top-info-link"><i class="fa fa-heart"></i> Wishlist</a></li>
+                                    <li><a href="#" class="top-info-link"><i class="fa fa-refresh"></i> Comparar</a></li>
+                                    <li><a href="#" class="top-info-link"><i class="fa fa-sign-out"></i> Check out</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="main-header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="logo">
+                                <a href="index.html"><img src="../images/logo.png" alt="" /></a>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-6">
+                            <div class="phone-info">
+                                <label>Llámanos</label>
+                                <h3 class="phone-number">Lada sin costo: (+00) 66 55 819</h3> </div>
+                        </div>
+                        <h:panelGroup id="cart">
+                      <div class="col-md-4 col-sm-4 col-xs-6">
+                      <div class="top-cart block-cart box">
+                        							<a href="#">
+								<h2>CARRITO</h2>
+								<p><h:outputText value = "#{cart.products}" /> Item(s) - $<h:outputText value = "#{cart.total}">
+                                            <f:convertNumber groupingUsed="true" minFractionDigits="2" />
+                                            </h:outputText> MXN</p>
+							</a>
+        					<div class="block-content box-inner">
+                                    <div class="inner">
+                                        <p class="block-subtitle">Artículo(s) añadido(s)</p>
+                                        <ol class="mini-products-list" id="cart-sidebar">
+               									
+               									 <p:repeat value="#{cart.cartDTO}" var="ca">
+               									 <li class="item odd">
+                                                <a class="product-image" href="#{ca.link}"> <img width="70" height="84" alt="" src="#{ca.imageUrl}" /> </a>
+                                                <p:commandLink  style="margin-right:20px;" action="#{cart.delete(ca)}">
+            										<i class="fa fa-trash"></i>
+        										</p:commandLink>
+                                                <div class="product-details">
+                                                    <p class="product-name"> <a href="#{ca.link}"><h:outputText value = "#{ca.title}" /></a> </p> <span class="price">$<h:outputText value = "#{ca.price}">
+                                                <f:convertNumber groupingUsed="true" minFractionDigits="2" />
+                                                </h:outputText> MXN</span></div>
+                                            	</li>
+		               								
+               									 </p:repeat>
+										
+
+									</ol>
+
+               </div>
+           </div>
+
+
+
+
+                         </div>
+                         </div>
+                         </h:panelGroup>
+                    </div>
+                </div>
+            </div>
+            <div class="header-nav">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-9 col-sm-12 col-xs-2">
+                        
+                            <nav class="main-nav main-nav2">
+                            <ul>
+                            <li class="menu-item-has-children"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categorías <i class="fa fa-angle-down"></i></a>
+                                <ul class="sub-menu">
+                                    <p:repeat value="#{categoriesbar.categoriesDTO}" var="ca">
+						            <li><a href="#{ca.url}"><h:outputText value = "#{ca.title}" /></a></li>
+						            </p:repeat>
+                                </ul>
+                                </li>
+                                <li><a href="#contacto"><h:outputText value = "Contacto" /></a></li>
+                                <li><a href="#"><h:outputText value = "Acerca de" /></a></li>
+                                <li><a href="#"><h:outputText value = "Artistas" /></a></li>
+                                </ul>
+                                <a href="#" class="btn-mobile-menu"></a>
+                            </nav>
+                        </div>
+                        <div class="col-md-3 col-sm-12 col-xs-10">
+                            <div class="search-form search-form2">
+                                <input type="text" value="Escribe para buscar..." onfocus="if (this.value==this.defaultValue) this.value = ''" onblur="if (this.value=='') this.value = this.defaultValue" />
+                                <input type="submit" value="" /> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Header -->
+        <div id="content">
+ <div class="container-fluid">
+        <div class="row">
+          <div id="el-example-generic" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#el-example-generic" data-slide-to="0" class="active"></li>
+    <li data-target="#el-example-generic" data-slide-to="1"></li>
+    <li data-target="#el-example-generic" data-slide-to="2"></li>
+    <li data-target="#el-example-generic" data-slide-to="3"></li>
+    
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+    <div class="item active">
+      <img src="../images/artistas_slider_mikelo.jpg" alt="..." style="width: 100%" />
+      <div class="marco">
+      <h1>Galería de artistas plateros y más..</h1>
+      <div class="cont-img">
+            <img src="../images/logo.png" alt="" />
+      <img src="../images/logo_mikelo_blanco.png" alt="" />
+      </div>
+      <p>La Serpiente Emplumada presenta el arte de la platería contemporánea que se elabora en Taxco, Gro. México. Un lindo pueblo con más de quinientos años de antigüedad y tradición platera.</p>
+            <ol class="lista">
+          <li>ir a página del artista <a href="www.google.com"><i class="fa fa-arrow-right"></i></a>  </li>
+          <li>ver productos <a href="www.google.com"><i class="fa fa-arrow-right"></i></a>  </li>
+      </ol>
+      </div>
+    </div>
+          <div class="item">
+      <img src="../images/artistas_slider_gaea.jpg" alt="..." style="width: 100%" />
+      <div class="marco">
+      <h1>Galería de artistas plateros y más..</h1>
+      <div class="cont-img">
+            <img src="../images/logo.png" alt="" />
+      <img src="../images/logo_gaea_blanco.png" alt="" />
+      </div>
+      <p>La sencilla y elegante belleza de nuestra colección de joyería en plata con un nuevo estilo barroco te impactará, te atrapará y la querrás.</p>
+            <ol class="lista">
+          <li>ir a página del artista <a href="www.google.com"><i class="fa fa-arrow-right"></i></a>  </li>
+          <li>ver productos <a href="www.google.com"><i class="fa fa-arrow-right"></i></a>  </li>
+      </ol>
+      </div>
+    </div>
+                <div class="item">
+      <img src="../images/artistas_slider_carranza.jpg" alt="..." style="width: 100%" />
+      <div class="marco">
+      <h1>Galería de artistas plateros y más..</h1>
+      <div class="cont-img">
+            <img src="../images/logo.png" alt="" />
+      <img src="../mages/logo_carranza_blanco.png" alt="" />
+      </div>
+      <p>Originales diseños y manufactura artesanal y tradicional de todas nuestras piezas nos distinguen.</p>
+            <ol class="lista">
+          <li>ir a página del artista <a href="www.google.com"><i class="fa fa-arrow-right"></i></a>  </li>
+          <li>ver productos <a href="www.google.com"><i class="fa fa-arrow-right"></i></a>  </li>
+      </ol>
+      </div>
+    </div>
+                      <div class="item">
+      <img src="../images/artistas_slider_jt.jpg" alt="..." style="width: 100%" />
+      <div class="marco">
+      <h1>Galería de artistas plateros y más..</h1>
+      <div class="cont-img">
+            <img src="../images/logo.png" alt="" />
+      <img src="../images/logo_JT_blanco.png" alt="" />
+      </div>
+      <p>Hablamos de plata y también de arte, una propuesta auténtica para ti.</p>
+            <ol class="lista">
+          <li>ir a página del artista <a href="www.google.com"><i class="fa fa-arrow-right"></i></a>  </li>
+          <li>ver productos <a href="www.google.com"><i class="fa fa-arrow-right"></i></a>  </li>
+      </ol>
+      </div>
+    </div>
+      </div>
+    </div>
+        </div>
+    </div>
+            <!-- End Banner Slider -->
+
+
+            <!-- start_banner_grid -->
+            <div class="banner-grid-adv">
+                <div class="clearfix">
+                    <div class="banner-grid-left">
+                        <div class="wrap-grid-adv-box clearfix">
+                            <div class="grid-image-box">
+                                <a href="#"><img src="../images/ad_05.png" alt="" /></a>
+                            </div>
+                            <div class="grid-text-box active">
+                                <div class="inner-grid-text-box">
+                                    <h3>estilo</h3>
+                                    <h2>sofisticado</h2>
+                                    <h3>- MTRO. CARRANZA -</h3> </div>
+                            </div>
+                        </div>
+                        <div class="wrap-grid-adv-box clearfix">
+                            <div class="grid-text-box">
+                                <div class="inner-grid-text-box">
+                                    <h3>piezas únicas</h3>
+                                    <h2>para ti</h2>
+                                    <h3>- mikelo -</h3> </div>
+                            </div>
+                            <div class="grid-image-box">
+                                <a href="#"><img src="../images/ad_06.png" alt="" /></a>
+                            </div>
+                        </div>
+                        <div class="wrap-grid-adv-box clearfix">
+                            <div class="grid-image-box">
+                                <a href="#"><img src="../images/ad_07.png" alt="" /></a>
+                            </div>
+                            <div class="grid-text-box gray-box">
+                                <div class="inner-grid-text-box">
+                                    <h3>joyeria con</h3>
+                                    <h2>vanguardia</h2>
+                                    <h3>- jt -</h3> </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="banner-grid-right">
+                        <div class="grid-image-box">
+                            <a href="#"><img src="../images/ad_08.png" alt="" /></a>
+                        </div>
+                        <div class="grid-text-box active">
+                            <div class="inner-grid-text-box">
+                                <h3>todo hecho</h3>
+                                <h2>con amor</h2>
+                                <h3>- gaea -</h3> </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- end_banner_grid -->
+            
+                  <div class="list-designer">
+                    <div class="container">
+                     <p class="artista"><h:outputText value="#{fn:replace(home.artistText,'\\n','&lt;br/&gt;')}" escape="false" /></p>
+                        <div class="content-list-designer">
+                            <label>ARTISTAS:</label>
+                            <ul class="list-inline">
+                             <p:repeat value="#{home.artistDTOs}" var="art">
+	                             <li class="item-designer">
+	                                    <a href="#{art.url}" class="designer-thumb"> <img src="#{art.artistPic}" alt="" width="152px" height="130px"/> </a>
+	                                    <h3><a href="#{art.url}"><h:outputText value="#{art.mark}" /></a></h3> </li>
+                             </p:repeat>
+                            </ul></div>
+                    </div>
+                </div>
+
+
+            <div class="list-product-slider">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="product-slider single-slider single-arrow ">
+                                <h2 class="title-slider"><h:outputText value = "#{home.cat1}" /></h2>
+                                <div class="sale-product-hightlight"><span>45% OFF</span></div>
+                                <div class="wrap-item">
+                                <p:repeat value="#{home.pcat1}" var="fe" id="cat1">
+                                    <div class="item">
+                                        <div class="item-product">
+                                            <div class="item-product-thumb">
+                                                <a href="#{fe.link}" class="item-product-link"> <img src="#{fe.imageUrl}" alt="#{fe.alt}" width="330px" height="421px" /> </a>
+                                            </div>
+                                            <div class="item-product-info">
+                                                <h3><h:outputText value = "#{fe.title}" /></h3>
+                                                <div class="info-product-price"> <span>
+                                                $<h:outputText value = "#{fe.price}">
+                                                <f:convertNumber groupingUsed="true" minFractionDigits="2" />
+                                                </h:outputText> MXN
+                                                </span> <h:panelGroup rendered="#{fe.del}">
+                                                <del>$<h:outputText value = "#{fe.orgPrice}">
+                                            <f:convertNumber groupingUsed="true" minFractionDigits="2" />
+                                            </h:outputText> MXN</del>
+                                                <label class="persale"><h:outputText value = "#{fe.discount}" />%</label>
+                                                </h:panelGroup> </div>
+                                                <div class="product-extra-link"><p:commandLink id="btncat1" action="#{cart.addToCart(fe)}" update="form:cart @this" styleClass="link-add-to-cart" value="#{cart.exist(fe) ? 'Eliminar del carrito' : 'Agregar al carrito'}" disabled="#{fe.stock eq 0}" /></div>
+                                            </div>
+                                            <div class="info-product-price-view">
+                                            <span> $<h:outputText value = "#{fe.price}">
+                                                <f:convertNumber groupingUsed="true" minFractionDigits="2" />
+                                                </h:outputText> MXN</span> 
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                   </p:repeat>
+                                </div>
+                            </div>
+                        </div>
+                       
+                       <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="product-slider single-slider single-arrow ">
+                                <h2 class="title-slider"><h:outputText value = "#{home.cat2}" /></h2>
+                                <div class="sale-product-hightlight"><span>45% OFF</span></div>
+                                <div class="wrap-item">
+                                <p:repeat value="#{home.pcat2}" var="fe" id="cat2">
+                                    <div class="item">
+                                        <div class="item-product">
+                                            <div class="item-product-thumb">
+                                                <a href="#{fe.link}" class="item-product-link"> <img src="#{fe.imageUrl}" alt="#{fe.alt}" width="330px" height="421px" /> </a>
+                                            </div>
+                                            <div class="item-product-info">
+                                                <h3><h:outputText value = "#{fe.title}" /></h3>
+                                                <div class="info-product-price"> <span>
+                                                $<h:outputText value = "#{fe.price}">
+                                                <f:convertNumber groupingUsed="true" minFractionDigits="2" />
+                                                </h:outputText> MXN
+                                                </span> <h:panelGroup rendered="#{fe.del}">
+                                                <del>$<h:outputText value = "#{fe.orgPrice}">
+                                            <f:convertNumber groupingUsed="true" minFractionDigits="2" />
+                                            </h:outputText> MXN</del>
+                                                <label class="persale"><h:outputText value = "#{fe.discount}" />%</label>
+                                                </h:panelGroup> </div>
+                                                <div class="product-extra-link"><p:commandLink action="#{cart.addToCart(fe)}" update="form:cart @this" styleClass="link-add-to-cart" value="#{cart.exist(fe) ? 'Eliminar del carrito' : 'Agregar al carrito'}" disabled="#{fe.stock eq 0}" /></div>
+                                            </div>
+                                            <div class="info-product-price-view">
+                                            <span> $<h:outputText value = "#{fe.price}">
+                                                <f:convertNumber groupingUsed="true" minFractionDigits="2" />
+                                                </h:outputText> MXN</span> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                   </p:repeat>
+                                </div>
+                            </div>
+                        </div>
+                        
+
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="product-slider single-slider single-arrow ">
+                                <h2 class="title-slider"><h:outputText value = "#{home.cat3}" /></h2>
+                                <div class="sale-product-hightlight"><span>45% OFF</span></div>
+                                <div class="wrap-item">
+                                <p:repeat value="#{home.pcat3}" var="fe" id="cat3">
+                                    <div class="item">
+                                        <div class="item-product">
+                                            <div class="item-product-thumb">
+                                                <a href="#{fe.link}" class="item-product-link"> <img src="#{fe.imageUrl}" alt="#{fe.alt}" width="330px" height="421px" /> </a>
+                                            </div>
+                                            <div class="item-product-info">
+                                                <h3><h:outputText value = "#{fe.title}" /></h3>
+                                                <div class="info-product-price"> <span>
+                                                $<h:outputText value = "#{fe.price}">
+                                                <f:convertNumber groupingUsed="true" minFractionDigits="2" />
+                                                </h:outputText> MXN
+                                                </span> <h:panelGroup rendered="#{fe.del}">
+                                                <del>$<h:outputText value = "#{fe.orgPrice}">
+                                            <f:convertNumber groupingUsed="true" minFractionDigits="2" />
+                                            </h:outputText> MXN</del>
+                                                <label class="persale"><h:outputText value = "#{fe.discount}" />%</label>
+                                                </h:panelGroup> </div>
+                                                <div class="product-extra-link"><p:commandLink action="#{cart.addToCart(fe)}" update="form:cart @this" styleClass="link-add-to-cart" value="#{cart.exist(fe) ? 'Eliminar del carrito' : 'Agregar al carrito'}" disabled="#{fe.stock eq 0}" /></div>
+                                            </div>
+                                            <div class="info-product-price-view">
+                                            <span> $<h:outputText value = "#{fe.price}">
+                                                <f:convertNumber groupingUsed="true" minFractionDigits="2" />
+                                                </h:outputText> MXN</span> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                   </p:repeat>
+                                </div>
+                            </div>
+                        </div>
+                       
+                       
+                       
+                    </div>
+                </div>
+            </div>
+            <!-- End Product Slider -->
+            <div class="banner-adv">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <div class="item-banner-adv light-gray">
+                                <div class="item-banner-adv-text">
+                                    <h2>joyeria <span>hombres</span></h2> <a href="#">ver todos</a> </div>
+                                <div class="item-banner-adv-image"> <img src="../images/adv1.png" alt="" /> </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <div class="item-banner-adv gray">
+                                <div class="item-banner-adv-text">
+                                    <h2>joyeria <span>damas</span></h2> <a href="#">ver todos</a> </div>
+                                <div class="item-banner-adv-image"> <img src="../images/adv2.png" alt="" /> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Banner Adv -->
+
+            <!-- start ANUNCIOS -->
+            <div class="box-ads">
+            <div class="container">
+                <div class="row">
+          <div class="box-ads-items">
+                    <div class="box-ads-item1">
+
+
+                       <div class="box-ads-item-thumb">
+                           <a href="https://www.facebook.com/sotaventotaxco/"><img class="img-responsiv" src="../images/ads-SOTAVENTO_01.jpg" alt="" /></a>
+
+                       </div>
+
+                       <div class="box-ads-info">
+                          <a href="https://www.facebook.com/sotaventotaxco/"><img src="../images/sotavento_logo.png" alt="" /></a>
+                           <h4>Come como en el siglo XVII!</h4>
+                           <a href="https://www.facebook.com/sotaventotaxco/"><h5>enamórate de taxco</h5></a>
+                           <h6>10% de Descuento mencionando la SE</h6>
+                       </div>
+
+
+
+                    </div>
+
+ 						<div class="box-ads-item">
+                       <div class="box-ads-item-thumb">
+                           <a href="https://www.facebook.com/sotaventotaxco/"><img class="img-responsiv" src="../images/ads-SOTAVENTO_02.jpg" alt="" /></a>
+                       </div>
+
+                    </div>
+
+                       <div class="box-ads-item">
+                       <div class="box-ads-item-thumb">
+                           <a href="https://www.facebook.com/sotaventotaxco/"><img class="img-responsiv" src="../images/ads-SOTAVENTO_03.jpg" alt="" /></a>
+                       </div>
+
+                    </div>
+
+                 </div>
+
+                </div>
+
+                </div>
+            </div>
+
+
+            </div>
+
+
+            <!-- close ANUNCIOS -->
+
+            <div class="product-list-category-slider">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-3 col-xs-12">
+                            <div class="category-adv-slider single-slider single-arrow">
+                                <h2 class="title-slider">SITIOS DE INTERES</h2>
+                                <div class="wrap-item">
+                                    <div class="item">
+                                        <div class="item-category-adv">
+                                            <a href="#" class="item-category-adv-link"><img src="../images/restaurant.png" alt="" /></a>
+                                            <p class="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> <a href="#" class="readmore">visitar</a> </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="item-category-adv">
+                                            <a href="#" class="item-category-adv-link"><img src="../images/hotel.png" alt="" /></a>
+                                            <p class="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> <a href="#" class="readmore">ver más</a> </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="item-category-adv">
+                                            <a href="#" class="item-category-adv-link"><img src="../images/paseo_taxco.png" alt="" /></a>
+                                            <p class="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> <a href="#" class="readmore">Visitar</a> </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="col-md-3 col-sm-3 col-xs-12">
+                            <div class="product-slider single-slider single-arrow ">
+                                <h2 class="title-slider"><h:outputText value = "#{home.cat4}" /></h2>
+                                <div class="sale-product-hightlight"><span>45% OFF</span></div>
+                                <div class="wrap-item">
+                                <p:repeat value="#{home.pcat4}" var="fe" id="cat4">
+                                    <div class="item">
+                                        <div class="item-product">
+                                            <div class="item-product-thumb">
+                                                <a href="#{fe.link}" class="item-product-link"> <img src="#{fe.imageUrl}" alt="#{fe.alt}" /> </a>
+                                            </div>
+                                            <div class="item-product-info">
+                                                <h3><h:outputText value = "#{fe.title}" /></h3>
+                                                <div class="info-product-price"> <span>
+                                                $<h:outputText value = "#{fe.price}">
+                                                <f:convertNumber groupingUsed="true" minFractionDigits="2" />
+                                                </h:outputText> MXN
+                                                </span> <h:panelGroup rendered="#{fe.del}">
+                                                <del>$<h:outputText value = "#{fe.orgPrice}">
+                                            <f:convertNumber groupingUsed="true" minFractionDigits="2" />
+                                            </h:outputText> MXN</del>
+                                                <label class="persale"><h:outputText value = "#{fe.discount}" />%</label>
+                                                </h:panelGroup> </div>
+                                                <div class="product-extra-link"><p:commandLink action="#{cart.addToCart(fe)}" update="form:cart @this" styleClass="link-add-to-cart" value="#{cart.exist(fe) ? 'Eliminar del carrito' : 'Agregar al carrito'}" disabled="#{fe.stock eq 0}" /></div>
+                                            </div>
+                                            <div class="info-product-price-view">
+                                            <span> $<h:outputText value = "#{fe.price}">
+                                                <f:convertNumber groupingUsed="true" minFractionDigits="2" />
+                                                </h:outputText> MXN</span> 
+                                    
+                                          
+                                            </div>
+                                        </div>
+                                    </div>
+                                   </p:repeat>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="col-md-3 col-sm-3 col-xs-12">
+                            <div class="product-slider single-slider single-arrow ">
+                                <h2 class="title-slider"><h:outputText value = "#{home.cat5}" /></h2>
+                                <div class="sale-product-hightlight"><span>45% OFF</span></div>
+                                <div class="wrap-item">
+                                <p:repeat value="#{home.pcat5}" var="fe" id="cat5">
+                                    <div class="item">
+                                        <div class="item-product">
+                                            <div class="item-product-thumb">
+                                                <a href="#{fe.link}" class="item-product-link"> <img src="#{fe.imageUrl}" alt="#{fe.alt}" /> </a>
+                                            </div>
+                                            <div class="item-product-info">
+                                                <h3><h:outputText value = "#{fe.title}" /></h3>
+                                                <div class="info-product-price"> <span>
+                                                $<h:outputText value = "#{fe.price}">
+                                                <f:convertNumber groupingUsed="true" minFractionDigits="2" />
+                                                </h:outputText> MXN
+                                                </span> <h:panelGroup rendered="#{fe.del}">
+                                                <del>$<h:outputText value = "#{fe.orgPrice}">
+                                            <f:convertNumber groupingUsed="true" minFractionDigits="2" />
+                                            </h:outputText> MXN</del>
+                                                <label class="persale"><h:outputText value = "#{fe.discount}" />%</label>
+                                                </h:panelGroup> </div>
+                                                <div class="product-extra-link"><p:commandLink action="#{cart.addToCart(fe)}" update="form:cart @this" styleClass="link-add-to-cart" value="#{cart.exist(fe) ? 'Eliminar del carrito' : 'Agregar al carrito'}" disabled="#{fe.stock eq 0}" /></div>
+                                            </div>
+                                            <div class="info-product-price-view">
+                                            <span> $<h:outputText value = "#{fe.price}">
+                                                <f:convertNumber groupingUsed="true" minFractionDigits="2" />
+                                                </h:outputText> MXN</span> 
+                                    
+                                           
+                                          
+                                            </div>
+                                        </div>
+                                    </div>
+                                   </p:repeat>
+                                </div>
+                            </div>
+                        </div>
+                            
+                        <div class="col-md-3 col-sm-3 col-xs-12">
+                            <div class="product-slider single-slider single-arrow ">
+                                <h2 class="title-slider"><h:outputText value = "#{home.cat6}" /></h2>
+                                <div class="sale-product-hightlight"><span>45% OFF</span></div>
+                                <div class="wrap-item">
+                                <p:repeat value="#{home.pcat6}" var="fe" id="cat6">
+                                    <div class="item">
+                                        <div class="item-product">
+                                            <div class="item-product-thumb">
+                                                <a href="#{fe.link}" class="item-product-link"> <img src="#{fe.imageUrl}" alt="#{fe.alt}"  /> </a>
+                                            </div>
+                                            <div class="item-product-info">
+                                                <h3><h:outputText value = "#{fe.title}" /></h3>
+                                                <div class="info-product-price"> <span>
+                                                $<h:outputText value = "#{fe.price}">
+                                                <f:convertNumber groupingUsed="true" minFractionDigits="2" />
+                                                </h:outputText> MXN
+                                                </span> <h:panelGroup rendered="#{fe.del}">
+                                                <del>$<h:outputText value = "#{fe.orgPrice}">
+                                            <f:convertNumber groupingUsed="true" minFractionDigits="2" />
+                                            </h:outputText> MXN</del>
+                                                <label class="persale"><h:outputText value = "#{fe.discount}" />%</label>
+                                                </h:panelGroup> </div>
+                                                <div class="product-extra-link"><p:commandLink action="#{cart.addToCart(fe)}" update="form:cart @this" styleClass="link-add-to-cart" value="#{cart.exist(fe) ? 'Eliminar del carrito' : 'Agregar al carrito'}" disabled="#{fe.stock eq 0}" /></div>
+                                            </div>
+                                            <div class="info-product-price-view">
+                                            <span> $<h:outputText value = "#{fe.price}">
+                                                <f:convertNumber groupingUsed="true" minFractionDigits="2" />
+                                                </h:outputText> MXN</span> 
+ 
+                                            </div>
+                                        </div>
+                                    </div>
+                                   </p:repeat>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End New arival -->
+                        
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="product-slider single-slider single-arrow ">
+                                <h2 class="title-slider"><h:outputText value = "#{home.cat7}" /></h2>
+                                <div class="sale-product-hightlight"><span>45% OFF</span></div>
+                                <div class="wrap-item">
+                                <p:repeat value="#{home.pcat7}" var="fe" id="cat7">
+                                    <div class="item">
+                                        <div class="item-product">
+                                            <div class="item-product-thumb">
+                                                <a href="#{fe.link}" class="item-product-link"> <img src="#{fe.imageUrl}" alt="#{fe.alt}" width="330px" height="421px" /> </a>
+                                            </div>
+                                            <div class="item-product-info">
+                                                <h3><h:outputText value = "#{fe.title}" /></h3>
+                                                <div class="info-product-price"> <span>
+                                                $<h:outputText value = "#{fe.price}">
+                                                <f:convertNumber groupingUsed="true" minFractionDigits="2" />
+                                                </h:outputText> MXN
+                                                </span> <h:panelGroup rendered="#{fe.del}">
+                                                <del>$<h:outputText value = "#{fe.orgPrice}">
+                                            <f:convertNumber groupingUsed="true" minFractionDigits="2" />
+                                            </h:outputText> MXN</del>
+                                                <label class="persale"><h:outputText value = "#{fe.discount}" />%</label>
+                                                </h:panelGroup> </div>
+                                                <div class="product-extra-link"><p:commandLink action="#{cart.addToCart(fe)}" update="form:cart @this" styleClass="link-add-to-cart" value="#{cart.exist(fe) ? 'Eliminar del carrito' : 'Agregar al carrito'}" disabled="#{fe.stock eq 0}" /></div>
+                                            </div>
+                                            <div class="info-product-price-view">
+                                            <span> $<h:outputText value = "#{fe.price}">
+                                                <f:convertNumber groupingUsed="true" minFractionDigits="2" />
+                                                </h:outputText> MXN</span> 
+                                    
+                                          
+                                          
+                                            </div>
+                                        </div>
+                                    </div>
+                                   </p:repeat>
+                                </div>
+                            </div>
+                        </div>
+                       
+                       <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="product-slider single-slider single-arrow ">
+                                <h2 class="title-slider"><h:outputText value = "#{home.cat8}" /></h2>
+                                <div class="sale-product-hightlight"><span>45% OFF</span></div>
+                                <div class="wrap-item">
+                                <p:repeat value="#{home.pcat8}" var="fe" id="cat8">
+                                    <div class="item">
+                                        <div class="item-product">
+                                            <div class="item-product-thumb">
+                                                <a href="#{fe.link}" class="item-product-link"> <img src="#{fe.imageUrl}" alt="#{fe.alt}" width="330px" height="421px" /> </a>
+                                            </div>
+                                            <div class="item-product-info">
+                                                <h3><h:outputText value = "#{fe.title}" /></h3>
+                                                <div class="info-product-price"> <span>
+                                                $<h:outputText value = "#{fe.price}">
+                                                <f:convertNumber groupingUsed="true" minFractionDigits="2" />
+                                                </h:outputText> MXN
+                                                </span> <h:panelGroup rendered="#{fe.del}">
+                                                <del>$<h:outputText value = "#{fe.orgPrice}">
+                                            <f:convertNumber groupingUsed="true" minFractionDigits="2" />
+                                            </h:outputText> MXN</del>
+                                                <label class="persale"><h:outputText value = "#{fe.discount}" />%</label>
+                                                </h:panelGroup> </div>
+                                                <div class="product-extra-link"><p:commandLink action="#{cart.addToCart(fe)}" update="form:cart @this" styleClass="link-add-to-cart" value="#{cart.exist(fe) ? 'Eliminar del carrito' : 'Agregar al carrito'}" disabled="#{fe.stock eq 0}" /></div>
+                                            </div>
+                                            <div class="info-product-price-view">
+                                            <span> $<h:outputText value = "#{fe.price}">
+                                                <f:convertNumber groupingUsed="true" minFractionDigits="2" />
+                                                </h:outputText> MXN</span> 
+                                    
+                                            
+                                          
+                                            </div>
+                                        </div>
+                                    </div>
+                                   </p:repeat>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        
+                        
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="product-slider single-slider single-arrow ">
+                                <h2 class="title-slider"><h:outputText value = "#{home.cat9}" /></h2>
+                                <div class="sale-product-hightlight"><span>45% OFF</span></div>
+                                <div class="wrap-item">
+                                <p:repeat value="#{home.pcat9}" var="fe" id="cat9">
+                                    <div class="item">
+                                        <div class="item-product">
+                                            <div class="item-product-thumb">
+                                                <a href="#{fe.link}" class="item-product-link"> <img src="#{fe.imageUrl}" alt="#{fe.alt}" width="330px" height="421px" /> </a>
+                                            </div>
+                                            <div class="item-product-info">
+                                                <h3><h:outputText value = "#{fe.title}" /></h3>
+                                                <div class="info-product-price"> <span>
+                                                $<h:outputText value = "#{fe.price}">
+                                                <f:convertNumber groupingUsed="true" minFractionDigits="2" />
+                                                </h:outputText> MXN
+                                                </span> <h:panelGroup rendered="#{fe.del}">
+                                                <del>$<h:outputText value = "#{fe.orgPrice}">
+                                            <f:convertNumber groupingUsed="true" minFractionDigits="2" />
+                                            </h:outputText> MXN</del>
+                                                <label class="persale"><h:outputText value = "#{fe.discount}" />%</label>
+                                                </h:panelGroup> </div>
+                                                <div class="product-extra-link"><p:commandLink action="#{cart.addToCart(fe)}" update="form:cart @this" styleClass="link-add-to-cart" value="#{cart.exist(fe) ? 'Eliminar del carrito' : 'Agregar al carrito'}" disabled="#{fe.stock eq 0}" /></div>
+                                            </div>
+                                            <div class="info-product-price-view">
+                                            <span> $<h:outputText value = "#{fe.price}">
+                                                <f:convertNumber groupingUsed="true" minFractionDigits="2" />
+                                                </h:outputText> MXN</span> 
+                                    
+                                          
+                                            </div>
+                                        </div>
+                                    </div>
+                                   </p:repeat>
+                                </div>
+                            </div>
+                        </div>
+                       
+                       
+                       
+                    </div>
+                </div>
+            </div>
+            <!-- End Category Slider -->
+           
+          
+            
+          
+    
+
+
+<div class="footer-quick-search">
+			<div class="container">
+				<div class="content-quick-search">
+					<label>ARTISTAS:</label>
+					<a href="#">#</a>
+					<a href="#">A</a>
+					<a href="#">B</a>
+					<a href="#">C</a>
+					<a href="#">D</a>
+					<a href="#">E</a>
+					<a href="#">F</a>
+					<a href="#">G</a>
+					<a href="#">H</a>
+					<a href="#">I</a>
+					<a href="#">J</a>
+					<a href="#">K</a>
+					<a href="#">L</a>
+					<a href="#">M</a>
+					<a href="#">N</a>
+					<a href="#">O</a>
+					<a href="#">P</a>
+					<a href="#">Q</a>
+					<a href="#">R</a>
+					<a href="#">S</a>
+					<a href="#">U</a>
+					<a href="#">V</a>
+					<a href="#">W</a>
+					<a href="#">X</a>
+					<a href="#">Y</a>
+					<a href="#">Z</a>
+				</div>
+			</div>
+		</div>
+		<!-- End Quick Search -->
+
+
+            <div class="list-brand single-arrow">
+                <div class="container">
+                    <div class="wrap-item">
+                        <div class="item">
+                            <div class="item-brand">
+                                <a href="#"><img src="../images/brand1.png" alt="" /></a>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="item-brand">
+                                <a href="#"><img src="../images/brand2.png" alt="" /></a>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="item-brand">
+                                <a href="#"><img src="../images/brand3.png" alt="" /></a>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="item-brand">
+                                <a href="#"><img src="../images/brand4.png" alt="" /></a>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="item-brand">
+                                <a href="#"><img src="../images/brand5.png" alt="" /></a>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="item-brand">
+                                <a href="#"><img src="../images/brand6.png" alt="" /></a>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="item-brand">
+                                <a href="#"><img src="../images/brand7.png" alt="" /></a>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="item-brand">
+                                <a href="#"><img src="../images/brand8.png" alt="" /></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Partner -->
+        </div>
+        <!-- End Content -->
+        <div id="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12 col-xs-12">
+                            <div class="left-footer">
+                                <div class="logo-footer logo-footer2">
+                                    <a href="#"><img src="../images/logo-footer.png" alt="" /></a>
+                                </div>
+                                <a name="contacto"></a>
+                                <div class="contact-footer">
+                                    <h2 class="title-footer">Contáctanos</h2>
+                                    <p><i class="fa fa-home"></i> De lunes a jueves de 10 a 15 hrs.. Calle Benito Juárez no. 41, Taxco, Gro, México</p>
+                                    <p><i class="fa fa-envelope"></i> info@serpienteemplumada.com</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8 col-sm-12 col-xs-12">
+                            <div class="right-footer">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <h2 class="title-footer">Conéctate</h2>
+                                        <div class="social-footer social-footer2">
+                                            <ul>
+                                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-share-alt"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <h2 class="title-footer">Suscripción</h2>
+                                        <div class="news-letter-form">
+                                                <input type="text" value="Escribe tu Email..." onfocus="if (this.value==this.defaultValue) this.value = ''" onblur="if (this.value=='') this.value = this.defaultValue" />
+                                                <input type="submit" value="Suscríbete" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-4 col-xs-12">
+                                        <div class="box-footer-menu">
+                                            <h2 class="title-footer">Mi Cuenta</h2>
+                                            <ul class="menu-footer-default">
+                                                <li><a href="#">Mis órdenes</a></li>
+                                                <li><a href="#">Mi crédito</a></li>
+                                                <li><a href="#">Mis direcciones</a></li>
+                                                <li><a href="#">Información personal</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-12">
+                                        <div class="box-footer-menu">
+                                            <h2 class="title-footer">INFORMACION</h2>
+                                            <ul class="menu-footer-default">
+                                                <li><a href="#">Nosotros</a></li>
+                                                <li><a href="#">Términos de uso</a></li>
+                                                <li><a href="#">Políticas de privacidad</a></li>
+                                                <li><a href="#">Contáctanos</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-12">
+                                        <div class="box-footer-menu">
+                                            <h2 class="title-footer">SERVICIO AL CLIENTE</h2>
+                                            <ul class="menu-footer-default">
+                                                <li><a href="#">Preguntas frecuentes</a></li>
+                                                <li><a href="#">Oficinas</a></li>
+                                                <li><a href="#">Métodos de pago</a></li>
+                                                <li><a href="#">Artistas</a></li>
+                                                <li><a href="#">Promociones</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <div class="copyright">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-7 col-xs-12">
+                            <p class="info-copyright">Serpiente Emplumada Store © 2021. Todos los derechos reservados. </p>
+                            <p class="info-copyright">Diseñado por Patricio Ortega y Juan Balanzar</p>
+                        </div>
+                        <div class="col-md-6 col-sm-5 col-xs-12">
+                            <div class="payment-method">
+                                <ul class="list-inline text-right">
+                                    <li>
+                                        <a href="#"><img src="../images/payment1.png" alt="" /></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><img src="../images/payment2.png" alt="" /></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><img src="../images/payment3.png" alt="" /></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><img src="../images/payment4.png" alt="" /></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+</h:form>
+     <!-- End Footer -->
+  		
+       
+        <script type="text/javascript" src="../js/jquery.fancybox.js"></script>
+        <script type="text/javascript" src="../js/owl.carousel.js"></script>
+        <script type="text/javascript" src="../js/jquery.mCustomScrollbar.js"></script>
+        <script type="text/javascript" src="../js/jquery.hoverdir.js"></script>
+        <script type="text/javascript" src="../js/modernizr.custom.js"></script>
+        <script type="text/javascript" src="../js/jquery.jcarousellite.js"></script>
+        <script type="text/javascript" src="../js/theme.js"></script>
+       <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+</h:body>
+
+</html>

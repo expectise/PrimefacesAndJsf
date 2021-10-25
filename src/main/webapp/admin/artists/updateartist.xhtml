@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:h="http://java.sun.com/jsf/html"
+ xmlns:p="http://primefaces.org/ui"
+ xmlns:f="http://java.sun.com/jsf/core"
+ xmlns:ui="http://java.sun.com/jsf/facelets">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+</head>
+
+<h:body>
+ <ui:composition template="../template/template_form.xhtml">
+  <ui:param name="title" value="Actualizar Artista" />
+ <ui:define name="content">
+
+   <h:form id="form" enctype="multipart/form-data">
+                  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                    <div class="card-header card-header-primary">
+                  <h4 class="card-title">Editar Artista</h4>
+                </div>
+                <div class="card-body">
+                
+                </div>
+                   
+                      <div class="row">
+                    <div class="col-sm-3">
+                         <div class="form-group">
+                          <label class="bmd-label-floating">País</label>
+                          <div class="p-field p-col-12 p-md-4">
+				                <p:selectOneMenu id="country" value="#{artist.artistDTO.country}" required="true"
+				                                panelStyle="width:180px" effect="fade" var="c" styleClass="camposPequeno"
+				                                filter="true" filterMatchMode="startsWith" converter="#{countryConverter}">
+				
+				                    <f:selectItems value="#{artist.countries}" var="con"
+				                                itemLabel="#{con.prefix}" itemValue="#{con}"/>
+				
+				                  
+				                    <p:column>
+				                        <f:facet name="header">
+				                            <h:outputText value="Prefijo"/>
+				                        </f:facet>
+				                        <h:outputText value="#{c.prefix}"/>
+				                    </p:column>
+				                  
+				                </p:selectOneMenu>
+				            </div>
+                        </div>
+                        <p:message for="country"/>
+                        </div>
+                   <div class="col-sm-3">
+                         <div class="form-group">
+                          <label class="bmd-label-floating">Nombres</label>
+                           <p:inputText id="firstname" value="#{artist.artistDTO.firstname}" styleClass="form-control camposPequeno"  required="true">
+                           <f:validateLength minimum="3" maximum="50" />
+                           </p:inputText>
+                        </div>
+                        <p:message for="firstname"/>
+                        </div>
+                        
+                        <div class="col-sm-3">
+                         <div class="form-group">
+                          <label class="bmd-label-floating">Apellido Paterno</label>
+                           <p:inputText id="lastname" value="#{artist.artistDTO.lastname}" styleClass="form-control camposPequeno"  required="true">
+                           <f:validateLength minimum="3" maximum="50" />
+                           </p:inputText>
+                        </div>
+                        <p:message for="lastname"/>
+                        </div>
+                        
+                        
+                        <div class="col-sm-3">
+                         <div class="form-group">
+                          <label class="bmd-label-floating">Apellido Materno</label>
+                           <p:inputText id="middlename" value="#{artist.artistDTO.middlename}" styleClass="form-control camposPequeno"  required="true">
+                           <f:validateLength minimum="3" maximum="50" />
+                           </p:inputText>
+                        </div>
+                        <p:message for="middlename"/>
+                        </div>
+                        
+                        </div>
+                        
+                        
+                   <div class="row">
+                   <div class="col-sm-3">
+                         <div class="form-group">
+                          <label class="bmd-label-floating">Marca</label>
+                           <p:inputText id="mark" value="#{artist.artistDTO.mark}" styleClass="form-control camposPequeno"  required="true">
+                           <f:validateLength minimum="3" maximum="40" />
+                           </p:inputText>
+                        </div>
+                        <p:message for="mark"/>
+                        </div>
+                        
+                        <div class="col-sm-3">
+                         <div class="form-group">
+                          <label class="bmd-label-floating">E-mail</label>
+                           <p:inputText id="email" value="#{artist.artistDTO.email}" styleClass="form-control camposPequeno"  required="true">
+                           <f:validateLength minimum="3" maximum="90" />
+                           <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                           </p:inputText>
+                        </div>
+                        <p:message for="email"/>
+                        </div>
+                        
+                        
+                        <div class="col-sm-3">
+                         <div class="form-group">
+                          <label class="bmd-label-floating">Fecha Nacimiento</label>
+                            <p:datePicker id="birthdate" value="#{artist.artistDTO.birthdate}" readonlyInput="true" monthNavigator="true" yearRange="1925:2004" pattern="yyyy/MM/dd" yearNavigator="true" showWeek="true" required="true" styleClass="fechaPequeno" />
+                        </div>
+                        <p:message for="birthdate"/>
+                        </div>
+                        
+                        
+                        
+                        
+                        <div class="col-sm-3">
+                         <div class="form-group">
+                          <label class="bmd-label-floating">Teléfono Celular</label>
+                           <p:inputText id="cellphone" value="#{artist.artistDTO.cellphone}" styleClass="form-control camposPequeno"  required="true">
+                           <f:validateRegex pattern="^[+]?(\d{1,2})?[\s.-]?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$" />
+                           </p:inputText>
+                        </div>
+                        <p:message for="cellphone"/>
+                        </div>
+                   </div>
+                    <div class="row">
+                         <div class="col-sm-4">
+                         <div class="form-group">
+                          <label class="bmd-label-floating">Teléfono del Negocio</label>
+                           <p:inputText id="businesspone" value="#{artist.artistDTO.businesspone}" styleClass="form-control camposMediano"  required="false">
+                           <f:validateRegex pattern="^[+]?(\d{1,2})?[\s.-]?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$" />
+                           </p:inputText>
+                        </div>
+                        <p:message for="businesspone"/>
+                        </div>
+                    
+                   <div class="col-sm-4">
+                         <div class="form-group">
+                          <label class="bmd-label-floating">RFC</label>
+                           <p:inputText id="rfc" value="#{artist.artistDTO.rfc}" styleClass="form-control camposMediano"  required="true">
+                           <f:validateLength minimum="12" maximum="13" />
+                           </p:inputText>
+                        </div>
+                        <p:message for="rfc"/>
+                        </div>
+                        
+                        
+                         
+                             <div class="col-sm-4">
+                         <div class="form-group">
+                          <label class="bmd-label-floating">Banco</label>
+                           <p:inputText id="bank" value="#{artist.artistDTO.bank}" styleClass="form-control camposMediano"  required="true">
+                           <f:validateLength minimum="3" maximum="30" />
+                           </p:inputText>
+                        </div>
+                        <p:message for="bank"/>
+                        </div>
+                                 
+                 
+                  </div>
+                  
+                  
+                  
+                     <div class="row">
+                         <div class="col-sm-3">
+                         <div class="form-group">
+                          <label class="bmd-label-floating">CLABE</label>
+                           <p:inputText id="clabe" value="#{artist.artistDTO.clabe}" styleClass="form-control camposPequeno"  required="true">
+                           <f:validateRegex pattern="^[0-9]{18,18}$" />
+                           </p:inputText>
+                        </div>
+                        <p:message for="clabe"/>
+                        </div>
+                    
+                     
+                         <div class="col-sm-3">
+                         <div class="form-group">
+                          <label class="bmd-label-floating">Número de Cuenta</label>
+                           <p:inputText id="noaccount" value="#{artist.artistDTO.noaccount}" styleClass="form-control camposPequeno"  required="true">
+                            <f:validateLength minimum="5" maximum="13" />
+                           </p:inputText>
+                        </div>
+                        <p:message for="noaccount"/>
+                        </div>
+                        
+                    <div class="col-sm-3">
+                         <div class="form-group">
+                          <label class="bmd-label-floating">Titular de Cuenta</label>
+                           <p:inputText id="naaccount" value="#{artist.artistDTO.naaccount}" styleClass="form-control camposPequeno"  required="true">
+                            <f:validateLength minimum="10" maximum="120" />
+                           </p:inputText>
+                        </div>
+                        <p:message for="naaccount"/>
+                        </div>
+                    
+                    <div class="col-sm-3">
+                         <div class="form-group">
+                          <label class="bmd-label-floating">Nombre Negocio</label>
+                           <p:inputText id="bsname" value="#{artist.artistDTO.bsname}" styleClass="form-control camposPequeno"  required="true">
+                           <f:validateLength minimum="3" maximum="60" />
+                           </p:inputText>
+                        </div>
+                        <p:message for="bsname"/>
+                        </div>
+                                 
+                 
+                  </div>
+                  
+                          
+                                 
+           
+                  <div class="row">
+                   
+                    
+                    <div class="col-sm-4">
+                         <div class="form-group centered">
+                          <label class="bmd-label-floating">Foto Artista</label>
+                           <p:fileUpload mode="simple" id="artistPicFile" value="#{artist.artistPicFile}" skinSimple="true"  required="false" styleClass="archivo  pull-center" sizeLimit="6000000">
+                           <f:validator validatorId="uploadIconValidatorNotMandatory"/>
+                           </p:fileUpload>
+                          </div>
+                          <p:message for="artistPicFile"/>
+                          <a href="#{artist.artisturl}" target="new">Foto Artista</a>
+                  </div>
+                        
+                        
+                         <div class="col-sm-4">
+                         <div class="form-group centered">
+                          <label class="bmd-label-floating">Trabajo Artista</label>
+                           <p:fileUpload mode="simple" id="workPicFile" value="#{artist.workPicFile}" skinSimple="true"  required="false" styleClass="archivo  pull-center" sizeLimit="6000000">
+                           <f:validator validatorId="uploadIconValidatorNotMandatory"/>
+                           </p:fileUpload>
+                          </div>
+                          <p:message for="workPicFile"/>
+                         
+                          <a href="#{artist.joburl}" target="new">Foto Trabajo Artista</a>
+                  </div>
+                  
+                         <div class="col-sm-4">
+                         <div class="form-group centered">
+                          <label class="bmd-label-floating">Logo</label>
+                           <p:fileUpload mode="simple" id="logoFile" value="#{artist.logoFile}" skinSimple="true"  required="false" styleClass="archivo  pull-center" sizeLimit="6000000">
+                           <f:validator validatorId="uploadIconValidatorNotMandatory"/>
+                           </p:fileUpload>
+                          </div>
+                          <p:message for="logoFile"/>
+                          <a href="#{artist.logourl}" target="new">Logo Artista Previo</a>
+                  </div>
+                 
+                  </div>
+                 
+			
+                    <div class="row">
+                     <div class="col-sm-3">
+                          <label class="bmd-label-floating">Creado</label>
+                          <h:outputText value="#{artist.artistDTO.created}" />
+                          <label class="bmd-label-floating">Actualizado</label>
+                           <h:outputText value="#{artist.artistDTO.updated}" />
+                  </div>
+                     <div class="col-sm-2">
+		                    <p:commandButton action="#{artist.showAddress(artist.address)}" styleClass="btn btn-primary" value="Editar Dirección" process="@this" immediate="true" oncomplete="removeDialogHeader(xhr, status, args);" >
+                  				<p:ajax event="dialogReturn" listener="#{artist.onCloseDialog}" />
+                  				</p:commandButton>
+		                    <div class="clearfix"></div>
+		                    </div>
+		                    
+		                      <div class="col-sm-3">
+		                    <p:commandButton action="#{artist.showList(artist.artistDTO.idArtists)}" styleClass="btn btn-primary" value="Editar Contenido Artista" process="@this" immediate="true" oncomplete="removeDialogHeader(xhr, status, args);" >
+                  				<p:ajax event="dialogReturn" listener="#{artist.onCloseDialog}"/>
+                  				</p:commandButton>
+		                    <div class="clearfix"></div>
+		                    </div>
+	                    <div class="col-sm-2">
+		     
+		                    <p:commandButton styleClass="btn btn-primary pull-right" value="Cancelar" immediate="true" action="#{artist.cancel}" />
+		                    <div class="clearfix"></div>
+		                    </div>
+		                    
+		            		<div class="col-sm-2">
+		                    <p:commandButton styleClass="btn btn-primary pull-right" value="Guardar" update="form"  immediate="false" action="#{artist.update}" />
+		                    <div class="clearfix"></div>
+	      
+	                    </div>
+	                    
+                 
+                 </div>
+                  
+                     </h:form>
+                  </ui:define>
+ </ui:composition>
+</h:body>
+</html>

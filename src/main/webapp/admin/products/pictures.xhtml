@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:h="http://java.sun.com/jsf/html"
+ xmlns:p="http://primefaces.org/ui"
+ xmlns:f="http://java.sun.com/jsf/core"
+ xmlns:ui="http://java.sun.com/jsf/facelets">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+</head>
+
+<h:body>
+ <ui:composition template="../template/template_form.xhtml">
+  <ui:param name="title" value="Fotos del producto" />
+ <ui:define name="content">
+
+   <h:form id="form" enctype="multipart/form-data">
+                  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />       
+            <div class="product card">
+   
+        <p:dataGrid var="pic" paginatorPosition="top" styleClass="ui-sm-12" value="#{pictureproduct.pictureproductDTOs}" columns="1" layout="grid"
+                    rows="4" paginator="true" id="pictures">
+
+            <div class="product-grid-item card" style="margin-bottom: 0">
+                
+                <div class="product-grid-item-content">
+                <a href="#{pic.urltoImage}" target="new">
+                    <img src="#{pic.urlThumbnail}"/>
+                 </a>
+                </div>
+                <div class="product-grid-item-bottom">
+				              <p:commandButton action="#{pictureproduct.onSelected(pic)}" styleClass="btn btn-primary pull-center" value="Actualizar" process="@this"  immediate="true">
+                  					<p:ajax event="dialogReturn" listener="#{pictureproduct.onCloseDialog}" update="form pictures" />
+                  				</p:commandButton>
+                  				
+                  				<p:commandButton action="#{pictureproduct.onDelete(pic)}" update="pictures" styleClass="btn btn-primary pull-center" value="Borrar" process="@this">
+                  				 	<p:confirm header="Confirmación" message="¿Quiere borrar esta fotografía permanentemente?" icon="ui-icon-alert" />
+                  				</p:commandButton>
+                </div>
+               
+            </div>
+
+       </p:dataGrid>
+	                    
+                 </div>
+                 
+                 <div class="row">
+                 	<div class="col-sm-6">
+                         <div class="form-group centered">
+                          <label class="bmd-label-floating">Foto</label>
+                           <p:fileUpload mode="simple" id="fotoFile" value="#{pictureproduct.pictureFile}" skinSimple="true"  required="true" styleClass="archivo  pull-center" sizeLimit="8000000">
+                           <f:validator validatorId="uploadIconValidator"/>
+                           </p:fileUpload>
+                          </div>
+                          <p:message for="fotoFile"/>
+                  </div>
+                  	<div class="col-sm-6">
+                           <div class="boton">
+		                    <p:commandButton styleClass="btn btn-primary pull-center" value="Guardar" update="fotoFile pictures"  immediate="false" action="#{pictureproduct.submit}" />
+		                    <div class="clearfix"></div>
+		                    </div>
+                  </div>
+                 </div>
+                 <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
+          	  	<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
+            	<p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" />
+        		</p:confirmDialog>
+                   </h:form>
+                     
+                  </ui:define>
+ </ui:composition>
+</h:body>
+</html>

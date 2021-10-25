@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:h="http://java.sun.com/jsf/html"
+ xmlns:p="http://primefaces.org/ui"
+ xmlns:f="http://java.sun.com/jsf/core"
+ xmlns:ui="http://java.sun.com/jsf/facelets">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+</head>
+
+<h:body>
+ <ui:composition template="../template/template_form.xhtml">
+  <ui:param name="title" value="Agregar Tag" />
+ <ui:define name="content">
+   <h:form id="form" enctype="multipart/form-data">
+                  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                    <div class="card-header card-header-primary">
+                  <h4 class="card-title">Agregar Tag</h4>
+                </div>
+                <div class="card-body">
+                
+                </div>
+                   
+                    <div class="row">
+                             <div class="col-sm-4">
+                         <div class="form-group">
+                          <label class="bmd-label-floating">Título</label>
+                           <p:inputText id="title" value="#{tag.title}" styleClass="form-control"  required="true">
+                           <f:validateLength minimum="3" maximum="30" />
+                           </p:inputText>
+                        </div>
+                        <p:message for="title"/>
+                        </div>
+                    
+        
+                         <div class="col-sm-4">
+                         <div class="form-group">
+                          <label class="bmd-label-floating">Categoría</label>
+                          <div class="p-field p-col-12 p-md-4">
+				                <p:selectOneMenu id="category" value="#{tag.category}" required="true"
+				                                panelStyle="width:180px" effect="fade" var="c"
+				                                filter="true" filterMatchMode="startsWith" converter="#{categoryConverter}">
+				
+				                    <f:selectItems value="#{tag.categories}" var="cat"
+				                                itemLabel="#{cat.title}" itemValue="#{cat}"/>
+				
+				                  
+				                    <p:column>
+				                        <f:facet name="header">
+				                            <h:outputText value="Título"/>
+				                        </f:facet>
+				                        <h:outputText value="#{c.title}"/>
+				                    </p:column>
+				                  
+				                </p:selectOneMenu>
+				            </div>
+                        </div>
+                        <p:message for="category"/>
+                        </div>
+                    
+        
+                                 
+                  <div class="col-sm-4">
+                         <div class="form-group">
+                          <label class="bmd-label-floating">Creado</label>
+                          <h:outputText value="#{tag.created}" />
+                          <label class="bmd-label-floating">Actualizado</label>
+                           <h:outputText value="#{tag.updated}" />
+                        </div>
+                  </div>
+                  
+                 
+                  </div>
+                  
+                          
+                      
+                                 
+           
+                  
+                 
+			
+                    <div class="row">
+	                    <div class="col-sm-10">
+		                    <div class="boton">
+		                    <p:commandButton styleClass="btn btn-primary pull-right" value="Cancelar" immediate="true" action="#{tag.cancel}" />
+		                    <div class="clearfix"></div>
+		                    </div>
+		                    </div>
+		            		<div class="col-sm-2">
+		                    <div class="boton">
+		                    <p:commandButton styleClass="btn btn-primary pull-right" value="Guardar" update="form"  immediate="false" action="#{tag.submit}" />
+		                    <div class="clearfix"></div>
+		                    </div>
+		                    
+		                    
+	                    </div>
+	                    
+                   </div>
+   
+                     </h:form>
+                  </ui:define>
+ </ui:composition>
+</h:body>
+</html>

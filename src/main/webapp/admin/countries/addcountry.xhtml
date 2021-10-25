@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:h="http://java.sun.com/jsf/html"
+ xmlns:p="http://primefaces.org/ui"
+ xmlns:f="http://java.sun.com/jsf/core"
+ xmlns:ui="http://java.sun.com/jsf/facelets">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+</head>
+
+<h:body>
+ <ui:composition template="../template/template_form.xhtml">
+  <ui:param name="title" value="Agregar Idioma" />
+ <ui:define name="content">
+   <h:form id="form" enctype="multipart/form-data">
+                  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                    <div class="card-header card-header-primary">
+                  <h4 class="card-title">Agregar País</h4>
+                </div>
+                <div class="card-body">
+                
+                </div>
+                   
+                    <div class="row">
+                             <div class="col-sm-3">
+                         <div class="form-group">
+                          <label class="bmd-label-floating">Prefijo</label>
+                           <p:inputText id="prefix" value="#{countrie.prefix}" styleClass="form-control camposPequeno"  required="true">
+                           <f:validateLength minimum="2" maximum="2" />
+                           </p:inputText>
+                        </div>
+                    	<p:message for="prefix"/>
+                        </div>
+                    
+        
+                      <div class="col-sm-3">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Precio de envío</label>
+                          <p:inputText id="shipPrice" value="#{countrie.shipPrice}" styleClass="form-control camposPequeno"  required="true">
+                          <f:validateRegex pattern="^([0-9]{1,5})(\.[0-9]{1,2})?$"/>
+                          </p:inputText>
+                        </div>
+                        <p:message for="shipPrice"/>
+                  </div>
+
+                  <div class="col-sm-3">
+                         <div class="form-group">
+                          <label class="bmd-label-floating">Precio Excento</label>
+                           <p:inputText id="excentPrice" value="#{countrie.excentPrice}" styleClass="form-control camposPequeno"  required="true">
+                           <f:validateRegex pattern="^([0-9]{1,6})(\.[0-9]{1,2})?$"/>
+                           </p:inputText>
+                        </div>
+                        <p:message for="excentPrice"/>
+                        </div>
+                        
+                                 
+                  <div class="col-sm-3">
+                         <div class="form-group">
+                          <label class="bmd-label-floating">Creado</label>
+                          <h:outputText value="#{countrie.created}" />
+                          <label class="bmd-label-floating">Actualizado</label>
+                           <h:outputText value="#{countrie.updated}" />
+                        </div>
+                  </div>
+                  
+                 
+                  </div>
+
+                    <div class="row">
+	                    <div class="col-sm-10">
+		                    <div class="boton">
+		                    <p:commandButton styleClass="btn btn-primary pull-right" value="Cancelar" immediate="true" action="#{countrie.cancel}" />
+		                    <div class="clearfix"></div>
+		                    </div>
+		                    </div>
+		            		<div class="col-sm-2">
+		                    <div class="boton">
+		                    <p:commandButton styleClass="btn btn-primary pull-right" value="Guardar" update="form"  immediate="false" action="#{countrie.submit}" />
+		                    <div class="clearfix"></div>
+		                    </div>
+		                    
+		                    
+	                    </div>
+	                    
+                   </div>
+   
+                     </h:form>
+                  </ui:define>
+ </ui:composition>
+</h:body>
+</html>

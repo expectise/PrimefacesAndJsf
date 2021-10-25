@@ -1,0 +1,66 @@
+.ui-button-text-only .ui-button-text {
+    font-size: 12px !important;
+}
+
+.btn{
+	padding:0px;
+}
+
+.dialogwindow {
+    z-index: 9999 !important;
+}
+
+.ui-scrollpanel-content {
+    height: 100%;
+    width: 100%;
+}
+
+.boton{
+	margin: 15px;
+}
+
+.archivo{
+	margin-left: 5px;
+}
+
+
+.centered{
+  margin: auto;
+  width: 80%;
+  padding: 10px;
+}
+
+.camposPequeno{
+	width: 120px;
+}
+
+.fechaPequeno input{
+	width: 120px !important;
+}
+
+.camposMediano{
+	width: 170px;
+}
+
+.camposGrande{
+	width: 185px;
+}
+
+.logo{
+	background-color:rgba(19, 30, 41, 0.9);
+}
+
+.ui-dialog-content{ 
+    max-width: 1500px !important; 
+    max-height: 700px !important;
+    margin-bottom: 5px !important;
+}
+
+.ui-datagrid-column{
+	max-width:130px !important;
+}
+
+.ui-md-4{
+	max-width:130px !important;
+}
+

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:p="http://primefaces.org/ui"
+  xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+  <meta charset="utf-8" />
+  <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png" />
+  <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+   <!-- CSS Files -->
+  <link href="../assets/css/popup.css" rel="stylesheet" />
+   -
+  <!-- CSS Just for demo purpose, don't include it in your project -->
+  <link href="../assets/demo/demo.css" rel="stylesheet" />
+<title>#{title}</title>
+</h:head>
+
+<body class="">
+ <div class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="card">
+              	<ui:insert name="content"/>
+              </div>
+            </div>
+		</div>
+	</div>
+</div>
+   <script type="text/javascript">
+function removeDialogHeader(xhr, status, args){
+var showHeader=args.showDialogHeader;
+if (!showHeader){
+//jquery gets all elements with class name ui-dialog-titlebar
+var elements= $(".ui-dialog-titlebar");
+//to remove elements
+elements.remove();
+//or you can achive the same effect by inserting display:none into element style
+//elements.css("display", "none");
+}
+} 
+
+$(document).ready(function(){
+    $(this).scrollTop(0);
+});
+</script>
+  
+</body>
+
+</html>

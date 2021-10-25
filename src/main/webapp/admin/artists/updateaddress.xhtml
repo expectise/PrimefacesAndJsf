@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:h="http://java.sun.com/jsf/html"
+ xmlns:p="http://primefaces.org/ui"
+ xmlns:f="http://java.sun.com/jsf/core"
+ xmlns:ui="http://java.sun.com/jsf/facelets">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+</head>
+
+<h:body>
+ <ui:composition template="../template/template_form.xhtml">
+  <ui:param name="title" value="Actualizar Dirección del artista" />
+ <ui:define name="content">
+
+   <h:form id="form" enctype="multipart/form-data">
+                  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+      
+                
+                 <div class="row">
+                    
+                   <div class="col-sm-3">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Estado</label>
+                           <p:inputText id="state" value="#{addressartist.addressDTO.state}" styleClass="form-control camposPequeno"  required="true">
+                           <f:validateLength minimum="3" maximum="40" />
+                           </p:inputText>
+                        </div>
+                        <p:message for="state"/>
+                        </div>
+                        
+                        
+                 
+                        
+                        <div class="col-sm-3">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Ciudad</label>
+                           <p:inputText id="city" value="#{addressartist.addressDTO.city}" styleClass="form-control camposPequeno"  required="true">
+                           <f:validateLength minimum="3" maximum="40" />
+                           </p:inputText>
+                        </div>
+                        <p:message for="city"/>
+                        </div>
+                        
+                        
+                    
+                        
+                         <div class="col-sm-3">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Código Postal</label>
+                           <p:inputText id="postalCode" value="#{addressartist.addressDTO.postalCode}" styleClass="form-control camposPequeno"  required="true">
+                           <f:validateLength minimum="4" maximum="7" />
+                           </p:inputText>
+                        </div>
+                        <p:message for="postalCode"/>
+                        </div>
+                        
+                        
+                       <div class="col-sm-3">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Calle</label>
+                           <p:inputText id="street" value="#{addressartist.addressDTO.street}" styleClass="form-control camposPequeno"  required="true">
+                           <f:validateLength minimum="3" maximum="50" />
+                           </p:inputText>
+                        </div>
+                        <p:message for="street"/>
+                        </div>
+                    
+                    </div>
+                <div class="row">
+                    
+                   <div class="col-sm-3">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Número Exterior</label>
+                           <p:inputText id="extNo" value="#{addressartist.addressDTO.extNo}" styleClass="form-control camposPequeno"  required="true">
+                           <f:validateLength minimum="1" maximum="8" />
+                           </p:inputText>
+                        </div>
+                        <p:message for="extNo"/>
+                        </div>
+                        
+                        
+                     
+                        
+                        <div class="col-sm-3">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Número Interior</label>
+                           <p:inputText id="intNo" value="#{addressartist.addressDTO.intNo}" styleClass="form-control camposPequeno"  required="false">
+                           <f:validateLength minimum="0" maximum="6" />
+                           </p:inputText>
+                        </div>
+                        <p:message for="intNo"/>
+                        </div>
+                        
+                        
+                    
+                        
+                    
+                        
+                       <div class="col-sm-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Observaciones</label>
+                           <p:inputText id="observations" value="#{addressartist.addressDTO.observations}" styleClass="form-control"  required="false">
+                           <f:validateLength minimum="3" maximum="30" />
+                           </p:inputText>
+                        </div>
+                        <p:message for="observations"/>
+                        </div>
+                            
+                   
+                        </div>
+                        
+                   <div class="row">
+                     <div class="col-sm-4">
+                          <label class="bmd-label-floating">Creado</label>
+                          <h:outputText value="#{addressartist.addressDTO.created}" />
+                          <label class="bmd-label-floating">Actualizado</label>
+                           <h:outputText value="#{addressartist.addressDTO.updated}" />
+                  </div>
+                 
+                        
+                        
+                        <div class="col-sm-6">
+		                    <div class="boton">
+		                    <p:commandButton styleClass="btn btn-primary pull-right" value="Cancelar" immediate="true" action="#{addressartist.cancel}" />
+		                    <div class="clearfix"></div>
+		                    </div>
+		                    </div>
+		            		<div class="col-sm-2">
+		                    <div class="boton">
+		                    <p:commandButton styleClass="btn btn-primary pull-right" value="Guardar"  immediate="false" update="form" action="#{addressartist.submit}" />
+		                    <div class="clearfix"></div>
+		                    </div>
+		                    </div>
+                       </div>
+                     </h:form>
+                  </ui:define>
+ </ui:composition>
+</h:body>
+</html>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:h="http://java.sun.com/jsf/html"
+ xmlns:p="http://primefaces.org/ui"
+ xmlns:f="http://java.sun.com/jsf/core"
+ xmlns:ui="http://java.sun.com/jsf/facelets">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+</head>
+
+<h:body>
+ <ui:composition template="../template/template_form.xhtml">
+  <ui:param name="title" value="Agregar Idioma" />
+ <ui:define name="content">
+   <h:form id="form" enctype="multipart/form-data">
+                  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                    <div class="card-header card-header-primary">
+                  <h4 class="card-title">Agregar Idioma</h4>
+                </div>
+                <div class="card-body">
+                
+                </div>
+                   
+                    <div class="row">
+                    
+                    
+        
+                      <div class="col-sm-4">
+                        <div class="form-group centered">
+                          <label class="bmd-label-floating">Acrónomo</label>
+                          <p:inputText id="acrom" value="#{language.acrom}" styleClass="form-control"  required="true">
+                          <f:validateLength minimum="2" maximum="2" />
+                          </p:inputText>
+                          <p:message for="acrom"/>
+                        </div>
+                  </div>
+
+                  <div class="col-sm-4">
+                         <div class="form-group centered">
+                          <label class="bmd-label-floating">Idioma</label>
+                           <p:inputText id="language" value="#{language.language}" styleClass="form-control"  required="true">
+                           <f:validateLength minimum="5" maximum="20" />
+                           </p:inputText>
+                            <p:message for="language"/>
+                        </div>
+                        </div>
+                  <div class="col-sm-4">
+                         <div class="form-group centered">
+                          <label class="bmd-label-floating">Icono</label>
+                           <p:fileUpload mode="simple" id="icon" value="#{language.icon}" skinSimple="true"  required="true" styleClass="archivo  pull-center" sizeLimit="1000000">
+                           <f:validator validatorId="uploadIconValidator"/>
+                           </p:fileUpload>
+                          </div>
+                          <p:message for="icon"/>
+                  </div>
+                  </div>
+
+                    <div class="row">
+	                    <div class="col-sm-10">
+		                    <div class="boton">
+		                    <p:commandButton styleClass="btn btn-primary pull-right" value="Cancelar" immediate="true" action="#{language.cancel}" />
+		                    <div class="clearfix"></div>
+		                    </div>
+		                    </div>
+		            		<div class="col-sm-2">
+		                    <div class="boton">
+		                    <p:commandButton styleClass="btn btn-primary pull-right" value="Guardar" update="form"  immediate="false" action="#{language.submit}" />
+		                    <div class="clearfix"></div>
+		                    </div>
+		                    
+		                    
+	                    </div>
+	                    
+                   </div>
+                   
+                     </h:form>
+                  </ui:define>
+ </ui:composition>
+</h:body>
+</html>

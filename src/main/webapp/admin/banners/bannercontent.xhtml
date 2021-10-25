@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:h="http://java.sun.com/jsf/html"
+ xmlns:p="http://primefaces.org/ui"
+ xmlns:f="http://java.sun.com/jsf/core"
+ xmlns:ui="http://java.sun.com/jsf/facelets">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+</head>
+
+<h:body>
+ <ui:composition template="../template/template_form.xhtml">
+  <ui:param name="title" value="Editar Contenido del Anuncio" />
+ <ui:define name="content">
+
+   <h:form id="form" enctype="multipart/form-data">
+                  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+      
+              
+                <p:panel id="bannerC" visible="#{bannercontent.visible}">
+                
+    
+ 					<div class="row">
+                        <div class="col-sm-3">
+                         <div class="form-group">
+                          <label class="bmd-label-floating">Idioma</label>
+                           <h:outputText value="#{bannercontent.bannercontentDTO.language}" />
+                        </div>
+                        </div>
+                        <div class="col-sm-3">
+                         <div class="form-group">
+                          <label class="bmd-label-floating">Título Anuncio Grande</label>
+                           <p:inputText id="titleBigBanner" value="#{bannercontent.bannercontentDTO.titleBigBanner}" styleClass="form-control camposPequeno"  required="true">
+                           <f:validateLength minimum="3" maximum="40" />
+                           </p:inputText>
+                        </div>
+                        <p:message for="titleBigBanner"/>
+                        </div>
+                        
+                        <div class="col-sm-3">
+                         <div class="form-group">
+                          <label class="bmd-label-floating">Subtitulo Anuncio Grande</label>
+                           <p:inputText id="subtitleBanner" value="#{bannercontent.bannercontentDTO.subtitleBanner}" styleClass="form-control camposPequeno"  required="true">
+                           <f:validateLength minimum="3" maximum="40" />
+                           </p:inputText>
+                        </div>
+                        <p:message for="subtitleBanner"/>
+                        </div>
+                        
+                       <div class="col-sm-3">
+                         <div class="form-group">
+                          <label class="bmd-label-floating">Título Anuncio Pequeño</label>
+                           <p:inputText id="titleShortBanner" value="#{bannercontent.bannercontentDTO.titleShortBanner}" styleClass="form-control camposPequeno"  required="true">
+                           <f:validateLength minimum="3" maximum="40" />
+                           </p:inputText>
+                        </div>
+                        <p:message for="titleShortBanner"/>
+                        </div>
+                        
+                        </div>
+                        <div class="row">
+                        <div class="col-sm-4">
+                          <label class="bmd-label-floating">Creado</label><br/>
+                          <h:outputText value="#{bannercontent.bannercontentDTO.created}" />
+                          <label class="bmd-label-floating">Actualizado</label><br/>
+                           <h:outputText value="#{bannercontent.bannercontentDTO.updated}" />
+                  		</div>
+                        <div class="col-sm-6">
+		                    <div class="boton">
+		                    <p:commandButton styleClass="btn btn-primary pull-right" value="Cancelar" immediate="true" update="bannerC table" action="#{bannercontent.cancel}" />
+		                    <div class="clearfix"></div>
+		                    </div>
+		                    </div>
+		            		<div class="col-sm-2">
+		                    <div class="boton">
+		                    <p:commandButton styleClass="btn btn-primary pull-right" value="Guardar" update="bannerC table"  immediate="false" action="#{bannercontent.submit}" />
+		                    <div class="clearfix"></div>
+		                    </div>
+		                    </div>
+                        </div>
+                 </p:panel>
+                 
+                 <p:panel id="table" visible="#{!bannercontent.visible}">
+                 <div class="table-responsive">
+                   <p:dataTable var="bannerC" value="#{bannercontent.bannercontentDTOs}"  id="mainTable">
+                   <p:column headerText="Idioma">
+			                <h:outputText value="#{bannerC.language}" />
+			            </p:column>
+			            
+			                <p:column headerText="Título">
+			                <h:outputText value="#{bannerC.titleShortBanner}" />
+			            </p:column>
+                   
+                    <p:column headerText="Actualizar">
+				          <p:commandButton action="#{bannercontent.onSelected(bannerC)}" styleClass="btn btn-primary pull-center" value="Actualizar" process="@this" update="form:bannerC form:table" />
+				    </p:column>
+                   </p:dataTable>
+                  </div>
+                  </p:panel>
+                     </h:form>
+                  </ui:define>
+ </ui:composition>
+</h:body>
+</html>

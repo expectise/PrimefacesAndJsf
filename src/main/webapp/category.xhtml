@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="es"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:p="http://primefaces.org/ui"
+  xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions">
+  
+  <h:head>
+     <meta http-equiv="X-UA-Compatible" content="IE=9" />
+     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SERPIENTE EMPLUMADA</title>
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,100,700' rel='stylesheet' type='text/css' />
+    <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="../../../css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/bootstrap-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/jquery.fancybox.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/jquery-ui.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/owl.carousel.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/owl.transitions.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/owl.theme.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/jquery.mCustomScrollbar.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/theme.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="../../../css/responsive.css" media="all" />  
+   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />  
+                    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+</h:head>
+<h:body>
+<h:form id="form">
+<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+<div class="wrap">
+        <div id="header">
+            <div class="top-header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-5 col-xs-12">
+                            <div class="top-support">
+                                <ul class="list-inline">
+                                    <li><a href="#" class="top-support-link">Ayuda </a></li>
+                                    <li><a href="#" class="top-support-link">Servicios</a></li>
+                                    <li><a href="#" class="top-support-link">MX</a></li>
+                                    <li>
+                                        <a href="#" class="top-support-link"><img src="../../../images/spain-flag-square-icon-16.png" alt="" /></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-7 col-xs-12">
+                            <div class="top-info">
+                                <ul class="list-inline text-right">
+                                    <li><a href="#" class="top-info-link"><i class="fa fa-user"></i> Mi cuenta</a></li>
+                                    <li><a href="#" class="top-info-link"><i class="fa fa-heart"></i> Wishlist</a></li>
+                                    <li><a href="#" class="top-info-link"><i class="fa fa-refresh"></i> Comparar</a></li>
+                                    <li><a href="#" class="top-info-link"><i class="fa fa-sign-out"></i> Check out</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="main-header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="logo">
+                                <a href="index.html"><img src="../../../images/logo.png" alt="" /></a>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-6">
+                            <div class="phone-info">
+                                <label>Llámanos</label>
+                                <h3 class="phone-number">Lada sin costo: (+00) 66 55 819</h3> </div>
+                        </div>
+                        <h:panelGroup id="cart">
+                      <div class="col-md-4 col-sm-4 col-xs-6">
+                      <div class="top-cart block-cart box">
+                        							<a href="#">
+								<h2>CARRITO</h2>
+								<p><h:outputText value = "#{cart.products}" /> Item(s) - $<h:outputText value = "#{cart.total}">
+                                            <f:convertNumber groupingUsed="true" minFractionDigits="2" />
+                                            </h:outputText> MXN</p>
+							</a>
+        					<div class="block-content box-inner">
+                                    <div class="inner">
+                                        <p class="block-subtitle">Artículo(s) añadido(s)</p>
+                                        <ol class="mini-products-list" id="cart-sidebar">
+               									
+               									 <p:repeat value="#{cart.cartDTO}" var="ca">
+               									 <li class="item odd">
+                                                <a class="product-image" href="#{ca.link}"> <img width="70" height="84" alt="" src="#{ca.imageUrl}" /> </a>
+                                                <p:commandLink  style="margin-right:20px;" action="#{cart.delete(ca)}">
+            										<i class="fa fa-trash"></i>
+        										</p:commandLink>
+                                                <div class="product-details">
+                                                    <p class="product-name"> <a href="#{ca.link}"><h:outputText value = "#{ca.title}" /></a> </p> <span class="price">$<h:outputText value = "#{ca.price}">
+                                                <f:convertNumber groupingUsed="true" minFractionDigits="2" />
+                                                </h:outputText> MXN</span></div>
+                                            	</li>
+		               								
+               									 </p:repeat>
+										
+
+									</ol>
+
+               </div>
+           </div>
+
+
+
+
+                         </div>
+                         </div>
+                         </h:panelGroup>
+                    </div>
+                </div>
+            </div>
+            <div class="header-nav">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-9 col-sm-12 col-xs-2">
+                            <nav class="main-nav main-nav2">
+                            <ul>
+
+                                <li><a href="#contacto"><h:outputText value = "Contacto" /></a></li>
+                                <li><a href="#"><h:outputText value = "Acerca de" /></a></li>
+                                <li><a href="#"><h:outputText value = "Artistas" /></a></li>
+                                </ul>
+                                <a href="#" class="btn-mobile-menu"></a>
+                            </nav>
+                        </div>
+                        <div class="col-md-3 col-sm-12 col-xs-10">
+                            <div class="search-form search-form2">
+                                <input type="text" value="Escribe para buscar..." onfocus="if (this.value==this.defaultValue) this.value = ''" onblur="if (this.value=='') this.value = this.defaultValue" />
+                                <input type="submit" value="" /> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Header -->
+
+
+
+
+
+
+
+
+
+
+<div id="content">
+		<div class="main">
+			<div class="container listing">
+				<div class="row">
+					<div class="col-left sidebar col-lg-3 col-md-3 col-sm-4 col-xs-12">
+						<div class="inner-left">
+							<div class="block block-layered-nav">
+								<div class="block-title">
+									<strong><span>Shop By</span></strong>
+								</div>
+								<dl id="narrow-by-list">
+									<dt class="first">Categorías</dt>
+									<dd>
+										<ol>
+										 	<p:repeat value="#{categoriesbar.categoriesDTO}" var="ca">
+										 		<h:panelGroup rendered="#{ca.idCategory != param['id']}">
+						            				<li><a href="#{ca.url}"><h:outputText value = "#{ca.title}" /></a></li>
+						            			</h:panelGroup>
+						            		</p:repeat>
+										</ol>
+									</dd>
+							</dl>
+							</div>
+							</div>
+							</div>
+							
+					<div class="col-main col-lg-9 col-md-9 col-sm-8 col-xs-12">
+						<div class="box-breadcrumbs">
+							<div class="breadcrumbs">
+								<ul>
+									<li class="home">
+										<a href="../../../" title="Ir a la página de Inicio">Inicio</a>
+										<span>|</span>
+									</li>
+									<li>
+										<a href="javascript:void();">Categoría</a>
+										<span>|</span>
+									</li>
+									<li class="category4">
+											 	<p:repeat value="#{categoriesbar.categoriesDTO}" var="ca">
+										 		<h:panelGroup rendered="#{ca.idCategory == param['id']}">
+						            				<strong><h:outputText value = "#{ca.title}" /></strong>
+						            			</h:panelGroup>
+						            		</p:repeat>
+
+									</li>
+								</ul>
+							</div>
+						</div>
+				
+		
+					</div>
+					
+						<div class="col-main col-lg-9 col-md-9 col-sm-8 col-xs-12">
+						<p:dataList value="#{dataListView.products1}" var="product" type="ordered">
+            <div class="product-list-item">
+                <p:graphicImage name="demo/images/product/#{product.image}"/>
+                <div class="product-list-detail">
+                    <div class="product-name">#{product.name}</div>
+                    <div class="product-description">#{product.description}</div>
+                    <p:rating readonly="true" value="#{product.rating}"/>
+                    <i class="pi pi-tag product-category-icon"/><span
+                        class="product-category">#{product.category}</span>
+                </div>
+                <div class="product-list-action">
+                    <h:outputText value="#{product.price}" styleClass="product-price">
+                        <f:convertNumber currencySymbol="$" type="currency"/>
+                    </h:outputText>
+                    <p:commandButton update=":form:productDetail" oncomplete="PF('productDialog').show()"
+                                     value="Add To Cart"
+                                     icon="pi pi-shopping-cart"
+                                     disabled="#{product.inventoryStatus == 'OUTOFSTOCK'}">
+                        <f:setPropertyActionListener value="#{product}"
+                                                     target="#{dataListView.selectedProduct}"/>
+                    </p:commandButton>
+                    <span class="product-badge status-#{product.inventoryStatus.name().toLowerCase()}">#{product.inventoryStatus.text}</span>
+                </div>
+            </div>
+        </p:dataList>
+						</div>
+						</div>
+					</div>
+							
+							
+							
+							</div>
+							</div>
+							</div>
+							
+
+                  
+           
+          
+            
+          
+    
+
+
+<div class="footer-quick-search">
+			<div class="container">
+				<div class="content-quick-search">
+					<label>ARTISTAS:</label>
+					<a href="#">#</a>
+					<a href="#">A</a>
+					<a href="#">B</a>
+					<a href="#">C</a>
+					<a href="#">D</a>
+					<a href="#">E</a>
+					<a href="#">F</a>
+					<a href="#">G</a>
+					<a href="#">H</a>
+					<a href="#">I</a>
+					<a href="#">J</a>
+					<a href="#">K</a>
+					<a href="#">L</a>
+					<a href="#">M</a>
+					<a href="#">N</a>
+					<a href="#">O</a>
+					<a href="#">P</a>
+					<a href="#">Q</a>
+					<a href="#">R</a>
+					<a href="#">S</a>
+					<a href="#">U</a>
+					<a href="#">V</a>
+					<a href="#">W</a>
+					<a href="#">X</a>
+					<a href="#">Y</a>
+					<a href="#">Z</a>
+				</div>
+			</div>
+		</div>
+		<!-- End Quick Search -->
+
+
+            <div class="list-brand single-arrow">
+                <div class="container">
+                    <div class="wrap-item">
+                        <div class="item">
+                            <div class="item-brand">
+                                <a href="#"><img src="../../../images/brand1.png" alt="" /></a>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="item-brand">
+                                <a href="#"><img src="../../../images/brand2.png" alt="" /></a>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="item-brand">
+                                <a href="#"><img src="../../../images/brand3.png" alt="" /></a>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="item-brand">
+                                <a href="#"><img src="../../../images/brand4.png" alt="" /></a>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="item-brand">
+                                <a href="#"><img src="../../../images/brand5.png" alt="" /></a>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="item-brand">
+                                <a href="#"><img src="../../../images/brand6.png" alt="" /></a>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="item-brand">
+                                <a href="#"><img src="../../../images/brand7.png" alt="" /></a>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="item-brand">
+                                <a href="#"><img src="../../../images/brand8.png" alt="" /></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Partner -->
+        <!-- End Content -->
+        <div id="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12 col-xs-12">
+                            <div class="left-footer">
+                                <div class="logo-footer logo-footer2">
+                                    <a href="#"><img src="../../../images/logo-footer.png" alt="" /></a>
+                                </div>
+                                <a name="contacto"></a>
+                                <div class="contact-footer">
+                                    <h2 class="title-footer">Contáctanos</h2>
+                                    <p><i class="fa fa-home"></i> De lunes a jueves de 10 a 15 hrs.. Calle Benito Juárez no. 41, Taxco, Gro, México</p>
+                                    <p><i class="fa fa-envelope"></i> info@serpienteemplumada.com</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8 col-sm-12 col-xs-12">
+                            <div class="right-footer">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <h2 class="title-footer">Conéctate</h2>
+                                        <div class="social-footer social-footer2">
+                                            <ul>
+                                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-share-alt"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <h2 class="title-footer">Suscripción</h2>
+                                        <div class="news-letter-form">
+                                                <input type="text" value="Escribe tu Email..." onfocus="if (this.value==this.defaultValue) this.value = ''" onblur="if (this.value=='') this.value = this.defaultValue" />
+                                                <input type="submit" value="Suscríbete" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-4 col-xs-12">
+                                        <div class="box-footer-menu">
+                                            <h2 class="title-footer">Mi Cuenta</h2>
+                                            <ul class="menu-footer-default">
+                                                <li><a href="#">Mis órdenes</a></li>
+                                                <li><a href="#">Mi crédito</a></li>
+                                                <li><a href="#">Mis direcciones</a></li>
+                                                <li><a href="#">Información personal</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-12">
+                                        <div class="box-footer-menu">
+                                            <h2 class="title-footer">INFORMACION</h2>
+                                            <ul class="menu-footer-default">
+                                                <li><a href="#">Nosotros</a></li>
+                                                <li><a href="#">Términos de uso</a></li>
+                                                <li><a href="#">Políticas de privacidad</a></li>
+                                                <li><a href="#">Contáctanos</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-12">
+                                        <div class="box-footer-menu">
+                                            <h2 class="title-footer">SERVICIO AL CLIENTE</h2>
+                                            <ul class="menu-footer-default">
+                                                <li><a href="#">Preguntas frecuentes</a></li>
+                                                <li><a href="#">Oficinas</a></li>
+                                                <li><a href="#">Métodos de pago</a></li>
+                                                <li><a href="#">Artistas</a></li>
+                                                <li><a href="#">Promociones</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <div class="copyright">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-7 col-xs-12">
+                            <p class="info-copyright">Serpiente Emplumada Store © 2021. Todos los derechos reservados. </p>
+                            <p class="info-copyright">Diseñado por Patricio Ortega y Juan Balanzar</p>
+                        </div>
+                        <div class="col-md-6 col-sm-5 col-xs-12">
+                            <div class="payment-method">
+                                <ul class="list-inline text-right">
+                                    <li>
+                                        <a href="#"><img src="../../../images/payment1.png" alt="" /></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><img src="../../../images/payment2.png" alt="" /></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><img src="../../../images/payment3.png" alt="" /></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><img src="../../../images/payment4.png" alt="" /></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+</h:form>
+     <!-- End Footer -->
+  		
+       
+        <script type="text/javascript" src="../../../js/jquery.fancybox.js"></script>
+        <script type="text/javascript" src="../../../js/owl.carousel.js"></script>
+        <script type="text/javascript" src="../../../js/jquery.mCustomScrollbar.js"></script>
+        <script type="text/javascript" src="../../../js/jquery.hoverdir.js"></script>
+        <script type="text/javascript" src="../../../js/modernizr.custom.js"></script>
+        <script type="text/javascript" src="../../../js/jquery.jcarousellite.js"></script>
+        <script type="text/javascript" src="../../../js/theme.js"></script>
+        <script type="text/javascript" src="../../../js/bootstrap.min.js"></script>
+</h:body>
+
+</html>

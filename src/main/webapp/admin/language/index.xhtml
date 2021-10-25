@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:h="http://java.sun.com/jsf/html"
+ xmlns:p="http://primefaces.org/ui"
+ xmlns:f="http://java.sun.com/jsf/core"
+ xmlns:ui="http://java.sun.com/jsf/facelets">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Panel de administración, Serpiente Emplumada</title>
+</head>
+<h:body>
+ <ui:composition template="../template/template.xhtml">
+  <ui:param name="page" value="language" />
+ <ui:define name="content">
+ <h:form>
+ <div class="row">
+            <div class="col-md-12">
+            
+              <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title ">Idiomas</h4>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                              
+		                <p:dataTable var="lang" value="#{languages.languages}" id="mainTable"
+		                rowKey="#{land.idLanguage}">
+		             
+				            <p:column headerText="Acrónomo">
+				                <h:outputText value="#{lang.acrom}" />
+				            </p:column>
+				            
+							<p:column headerText="Idioma">
+				                <h:outputText value="#{lang.language}" />
+				            </p:column>
+				  			            			
+				            <p:column headerText="Creado">
+				                <h:outputText value="#{lang.created}" />
+				            </p:column>
+				            
+				            <p:column headerText="Actualizado">
+				                <h:outputText value="#{lang.updated}" />
+				            </p:column>
+				            
+				            <p:column headerText="Actualizar">
+					         <p:commandButton action="#{languages.onActivate(lang)}" styleClass="btn btn-primary pull-center" value="#{lang.active ? 'Desactivar': 'Activar' }" process="@this" update="mainTable" />
+				            
+				              <p:commandButton action="#{languages.onSelected(lang)}" styleClass="btn btn-primary pull-center" value="Actualizar" process="@this" oncomplete="removeDialogHeader(xhr, status, args);" >
+                  				<p:ajax event="dialogReturn" listener="#{languages.onCloseDialog}" update="mainTable" />
+                  				</p:commandButton>
+				            </p:column>
+        				</p:dataTable>	
+                  </div>
+                  <p:commandButton action="#{languages.showAddPopup}" styleClass="btn btn-primary pull-right" value="Agregar" process="@this" oncomplete="removeDialogHeader(xhr, status, args);" >
+                  	<p:ajax event="dialogReturn" listener="#{languages.onCloseDialog}" update="mainTable" />
+                  </p:commandButton>
+                  <div class="clearfix"></div>
+                  </div>
+                  </div>
+                  </div>
+                  </div>
+        </h:form>
+        
+
+ </ui:define>
+ </ui:composition>
+</h:body>
+</html>

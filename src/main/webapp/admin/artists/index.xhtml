@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:h="http://java.sun.com/jsf/html"
+ xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:p="http://primefaces.org/ui">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Panel de administración, Serpiente Emplumada</title>
+</head>
+<h:body>
+ <ui:composition template="../template/template.xhtml">
+  <ui:param name="page" value="artists" />
+ <ui:define name="content">
+ <h:form>
+ <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+ 	
+ 	<div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title ">Artistas</h4>
+                  <p class="card-category">Listado de Artistas</p>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <p:dataTable var="art" value="#{artists.artists}"  id="mainTable">
+		                
+		                <p:column headerText="Nombre">
+			                <h:outputText value="#{art.firstname}" />
+			            </p:column>
+			            
+			              <p:column headerText="Apellido Paterno">
+			                <h:outputText value="#{art.lastname}" />
+			            </p:column>
+			            
+			               <p:column headerText="Apellido Materno">
+			                <h:outputText value="#{art.middlename}" />
+			            </p:column>
+		             
+			  			            			
+			            <p:column headerText="Creado">
+			                <h:outputText value="#{art.created}" />
+			            </p:column>
+			            
+			            <p:column headerText="Actualizado">
+			                <h:outputText value="#{art.updated}" />
+			            </p:column>
+			            
+			            <p:column headerText="Actualizar">
+			             <p:commandButton action="#{artists.onActivate(art)}" styleClass="btn btn-primary pull-center" value="#{art.active ? 'Desactivar': 'Activar' }" process="@this" update="mainTable" />
+				              <p:commandButton action="#{artists.onSelected(art)}" styleClass="btn btn-primary pull-center" value="Actualizar" process="@this" oncomplete="removeDialogHeader(xhr, status, args);" >
+                  				<p:ajax event="dialogReturn" listener="#{artists.onCloseDialog}" update="mainTable" />
+                  				</p:commandButton>
+				            </p:column>
+        		</p:dataTable>
+                  </div>
+                     
+                  <p:commandButton action="#{artists.showAddPopupB}" styleClass="btn btn-primary pull-left" value="Editar Página Global Artistas" process="@this" oncomplete="removeDialogHeader(xhr, status, args);" >
+                  	<p:ajax event="dialogReturn" listener="#{artists.onCloseDialog}" update="mainTable" />
+                  </p:commandButton>
+                  <p:commandButton action="#{artists.showAddPopup}" styleClass="btn btn-primary pull-right" value="Agregar" process="@this" oncomplete="removeDialogHeader(xhr, status, args);" >
+                  	<p:ajax event="dialogReturn" listener="#{artists.onCloseDialog}" update="mainTable" />
+                  </p:commandButton>
+               
+                </div>
+              </div>
+            </div>
+            </div>
+ </h:form>
+ </ui:define>
+ </ui:composition>
+</h:body>
+</html>

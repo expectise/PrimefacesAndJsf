@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:h="http://java.sun.com/jsf/html"
+ xmlns:p="http://primefaces.org/ui"
+ xmlns:f="http://java.sun.com/jsf/core"
+ xmlns:ui="http://java.sun.com/jsf/facelets">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+</head>
+
+<h:body>
+ <ui:composition template="../template/template_form.xhtml">
+  <ui:param name="title" value="Listado de artistas por Idioma" />
+ <ui:define name="content">
+
+   <h:form id="form" enctype="multipart/form-data">
+                  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+      
+                
+                <p:panel id="artistcontent" visible="#{artistcontent.visible}">
+                 <div class="row">
+                    
+                   <div class="col-sm-3">
+                         <div class="form-group">
+                          <label class="bmd-label-floating">Idioma</label>
+                           <h:outputText value="#{artistcontent.artistcontentDTO.language}" />
+                        </div>
+                        
+                        </div>
+                        
+                        <div class="col-sm-3">
+                        <br/>
+                         <div class="form-group">
+                          <label class="bmd-label-floating">Título</label>
+                           <p:inputText id="title" value="#{artistcontent.artistcontentDTO.title}" styleClass="form-control camposPequeno"  required="true">
+                           <f:validateLength minimum="3" maximum="50" />
+                           </p:inputText>
+                        </div>
+                        <p:message for="title"/>
+                        </div>
+                        
+                        
+                        <div class="col-sm-3">
+                         <div class="form-group">
+                          <label class="bmd-label-floating">Texto foto de artista</label>
+                           <p:inputText id="artistpic" value="#{artistcontent.artistcontentDTO.artistpic}" styleClass="form-control camposPequeno"  required="true">
+                           <f:validateLength minimum="3" maximum="30" />
+                           </p:inputText>
+                        </div>
+                        <p:message for="artistpic"/>
+                        </div>
+                        
+                        <div class="col-sm-3">
+                         <div class="form-group">
+                          <label class="bmd-label-floating">Texto foto del trabajo artista</label>
+                           <p:inputText id="artistwork" value="#{artistcontent.artistcontentDTO.artistwork}" styleClass="form-control camposPequeno"  required="true">
+                           <f:validateLength minimum="3" maximum="30" />
+                           </p:inputText>
+                        </div>
+                        <p:message for="artistwork"/>
+                        </div>
+                        
+                        
+                        </div>
+                        
+                        <div class="row">
+                          <label class="bmd-label-floating">Statement del Artista</label>
+                        <div class="col-sm-12">
+                        <div class="form-group">
+                         <p:inputTextarea id="statement" value="#{artistcontent.artistcontentDTO.statement}" rows="5" cols="70" counter="display" minlength="20" maxlength="2000"
+                         counterTemplate="{0} caracteres faltantes." autoResize="false">
+                         <f:validateLength minimum="20" maximum="1900" />
+                         </p:inputTextarea>
+                         <br/>
+                         <h:outputText id="display" class="p-d-block" />
+                 		<p:message for="statement"/>
+                        </div>
+                        </div>
+                        </div>
+                        <div class="row">
+                        <div class="col-sm-10">
+		                    <div class="boton">
+		                    <p:commandButton styleClass="btn btn-primary pull-right" value="Cancelar" immediate="true" update="artistcontent table" action="#{artistcontent.cancel}" />
+		                    <div class="clearfix"></div>
+		                    </div>
+		                    </div>
+		            		<div class="col-sm-2">
+		                    <div class="boton">
+		                    <p:commandButton styleClass="btn btn-primary pull-right" value="Guardar" update="artistcontent table"  immediate="false" action="#{artistcontent.submit}" />
+		                    <div class="clearfix"></div>
+		                    </div>
+		                    </div>
+                        </div>
+                 </p:panel>
+                 
+                 <p:panel id="table" visible="#{!artistcontent.visible}">
+                 <div class="table-responsive">
+                   <p:dataTable var="artistC" value="#{artistcontent.artistcontentDTOs}"  id="mainTable">
+                   <p:column headerText="Idioma">
+			                <h:outputText value="#{artistC.language}" />
+			            </p:column>
+			            
+			                <p:column headerText="Título">
+			                <h:outputText value="#{artistC.title}" />
+			            </p:column>
+                   
+                    <p:column headerText="Actualizar">
+				          <p:commandButton action="#{artistcontent.onSelected(artistC)}" styleClass="btn btn-primary pull-center" value="Actualizar" process="@this" update="form:artistcontent form:table" />
+				    </p:column>
+                   </p:dataTable>
+                  </div>
+                  </p:panel>
+                     </h:form>
+                  </ui:define>
+ </ui:composition>
+</h:body>
+</html>

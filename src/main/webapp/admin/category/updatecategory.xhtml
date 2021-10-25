@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:h="http://java.sun.com/jsf/html"
+ xmlns:p="http://primefaces.org/ui"
+ xmlns:f="http://java.sun.com/jsf/core"
+ xmlns:ui="http://java.sun.com/jsf/facelets">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+</head>
+
+<h:body>
+ <ui:composition template="../template/template_form.xhtml">
+  <ui:param name="title" value="Agregar Idioma" />
+ <ui:define name="content">
+   <h:form id="form" enctype="multipart/form-data">
+                  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                    <div class="card-header card-header-primary">
+                  <h4 class="card-title">Editar Idioma Categoría</h4>
+                </div>
+                <div class="card-body">
+                
+                </div>
+                   
+                     <div class="row">
+                             <div class="col-sm-9">
+                         <div class="form-group">
+                          <label class="bmd-label-floating">Título</label>
+                           <p:inputText id="title" value="#{category.title}" styleClass="form-control"  required="true">
+                           <f:validateLength minimum="3" maximum="30" />
+                           </p:inputText>
+                            <p:message for="title"/>
+                        </div>
+                        </div>
+                    
+        
+                      
+                                 
+                  <div class="col-sm-3">
+                         <div class="form-group">
+                          <label class="bmd-label-floating">Creado</label>
+                          <h:outputText value="#{category.created}" />
+                          <label class="bmd-label-floating">Actualizado</label>
+                           <h:outputText value="#{category.updated}" />
+                        </div>
+                  </div>
+                  
+                 
+                  </div>
+
+                    <div class="row">
+	                    <div class="col-sm-10">
+		                    <div class="boton">
+		                    <p:commandButton styleClass="btn btn-primary pull-right" value="Cancelar" immediate="true" action="#{category.cancel}" />
+		                    <div class="clearfix"></div>
+		                    </div>
+		                    </div>
+		            		<div class="col-sm-2">
+		                    <div class="boton">
+		                    <p:commandButton styleClass="btn btn-primary pull-right" value="Guardar" update="form"  immediate="false" action="#{category.update}" />
+		                    <div class="clearfix"></div>
+		                    </div>
+		                    
+		                    
+	                    </div>
+	                    
+                   </div>
+                   
+                   <div class="card-body">
+                  <div class="table-responsive">
+                   <p:dataTable var="categoryC" value="#{category.categorycontentDTO}"  id="mainTable">
+                   <p:column headerText="Idioma">
+			                <h:outputText value="#{categoryC.language}" />
+			            </p:column>
+			            
+			                <p:column headerText="Título">
+			                <h:outputText value="#{categoryC.title}" />
+			            </p:column>
+                   
+                    <p:column headerText="Actualizar">
+				              <p:commandButton action="#{category.onSelected(categoryC)}" styleClass="btn btn-primary pull-center" value="Actualizar" process="@this" oncomplete="removeDialogHeader(xhr, status, args);" >
+                  				<p:ajax event="dialogReturn" listener="#{category.onCloseDialog}" update="mainTable" />
+                  				</p:commandButton>
+				            </p:column>
+                   </p:dataTable>
+                  </div>
+                  </div>
+                   
+                     </h:form>
+                  </ui:define>
+ </ui:composition>
+</h:body>
+</html>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:h="http://java.sun.com/jsf/html"
+ xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:p="http://primefaces.org/ui">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Panel de administración, Serpiente Emplumada</title>
+</head>
+<h:body>
+ <ui:composition template="../template/template.xhtml">
+  <ui:param name="page" value="products" />
+ <ui:define name="content">
+ <h:form>
+ <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+ 	
+ 	<div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title ">Productos</h4>
+                  <p class="card-category">Listado de Productos</p>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <p:dataTable var="pro" value="#{products.products}"  id="mainTable"
+                     paginator="true" rows="5">
+		                
+		                <p:column headerText="Título" sortBy="#{pro.title}" filterBy="#{pro.title}">
+			                <h:outputText value="#{pro.title}" />
+			            </p:column>
+			             
+			              <p:column headerText="Folio" sortBy="#{pro.qr}" filterBy="#{pro.qr}">
+			                <h:outputText value="#{pro.qr}" />
+			            </p:column>
+			            
+			               <p:column headerText="¿Es Anillo?" sortBy="#{pro.isRing ? 'Sí' : 'No' }">
+			                <h:outputText value="#{pro.isRing ? 'Sí' : 'No' }" />
+			            </p:column>
+		             
+		             <p:column headerText="Marca" sortBy="#{pro.artists.mark}" filterBy="#{pro.artists.mark}">
+			                <h:outputText value="#{pro.artists.mark}" />
+			            </p:column>
+			  			            			
+			            <p:column headerText="Creado" sortBy="#{pro.created}" filterBy="#{pro.created}">
+			                <h:outputText value="#{pro.created}" />
+			            </p:column>
+			            
+			            <p:column headerText="Actualizado" sortBy="#{pro.updated}" filterBy="#{pro.updated}">
+			                <h:outputText value="#{pro.updated}" />
+			            </p:column>
+			            
+			            <p:column headerText="Actualizar">
+			             <p:commandButton action="#{products.onActivate(pro)}" styleClass="btn btn-primary pull-center" value="#{pro.active ? 'Desactivar': 'Activar' }" process="@this" update="mainTable" />
+				              <p:commandButton action="#{products.onSelected(pro)}" styleClass="btn btn-primary pull-center" value="Actualizar" process="@this" oncomplete="removeDialogHeader(xhr, status, args);" >
+                  				<p:ajax event="dialogReturn" listener="#{products.onCloseDialog}" update="mainTable" />
+                  				</p:commandButton>
+				            </p:column>
+        		</p:dataTable>
+                  </div>
+                  <p:commandButton action="#{products.showAddPopup}" styleClass="btn btn-primary pull-right" value="Agregar" process="@this" oncomplete="removeDialogHeader(xhr, status, args);" >
+                  	<p:ajax event="dialogReturn" listener="#{products.onCloseDialog}" update="mainTable" />
+                  </p:commandButton>
+               
+                </div>
+              </div>
+            </div>
+            </div>
+ </h:form>
+ </ui:define>
+ </ui:composition>
+</h:body>
+</html>

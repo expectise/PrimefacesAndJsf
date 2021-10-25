@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:h="http://java.sun.com/jsf/html"
+ xmlns:p="http://primefaces.org/ui"
+ xmlns:f="http://java.sun.com/jsf/core"
+ xmlns:ui="http://java.sun.com/jsf/facelets">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+</head>
+
+<h:body>
+ <ui:composition template="../template/template_form.xhtml">
+  <ui:param name="title" value="Agregar Tag" />
+ <ui:define name="content">
+   <h:form id="form" enctype="multipart/form-data">
+                  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                    <div class="card-header card-header-primary">
+                  <h4 class="card-title">Agregar Producto</h4>
+                </div>
+                <div class="card-body">
+                
+                </div>
+                   <div class="row">
+                    
+                   <div class="col-sm-3">
+                         <div class="form-group">
+                          <label class="bmd-label-floating">Título</label>
+                           <p:inputText id="title" value="#{product.productsDTO.title}" styleClass="form-control camposPequeno"  required="true">
+                           <f:validateLength minimum="3" maximum="35" />
+                           </p:inputText>
+                        </div>
+                        <p:message for="title"/>
+                        </div>
+                        
+                        <div class="col-sm-3">
+                         <div class="form-group">
+                          <label class="bmd-label-floating">Folio</label>
+                           <p:inputText id="qr" value="#{product.productsDTO.qr}" styleClass="form-control camposPequeno"  required="true">
+                           <f:validateLength minimum="3" maximum="6" />
+                           </p:inputText>
+                        </div>
+                        <p:message for="qr"/>
+                        </div>
+                        
+                        
+                        <div class="col-sm-3">
+                         <div class="form-group">
+                          <label class="bmd-label-floating">Stock</label>
+                           <p:inputText id="stock" value="#{product.productsDTO.stock}" styleClass="form-control camposPequeno"  required="true">
+                           <f:validateRegex pattern="^[0-9]{1,3}$" />
+                           </p:inputText>
+                        </div>
+                        <p:message for="stock"/>
+                        </div>
+                        
+                        
+                       <div class="col-sm-3">
+                       <div class="form-group">
+                          <label class="bmd-label-floating">Peso</label>
+                           <p:inputText id="weight" value="#{product.productsDTO.weight}" styleClass="form-control camposPequeno"  required="true">
+                           <f:validateRegex pattern="^([0-9]{1,4})(\.[0-9]{1,2})?$"/>
+                           </p:inputText>
+                        </div>
+                        <p:message for="weight"/>
+                        </div>
+                        
+                        </div>
+                   <div class="row">
+                    <div class="col-sm-3">
+                         <div class="form-group">
+                          <label class="bmd-label-floating">Descuento</label>
+                           <p:inputText id="discount" value="#{product.productsDTO.discount}" styleClass="form-control camposPequeno"  required="true">
+                           <f:validateRegex pattern="^[0-9]{1,2}$" />
+                           </p:inputText>
+                        </div>
+                        <p:message for="discount"/>
+                        </div>
+                        
+                      <div class="col-sm-3">
+                       <div class="form-group">
+                          <label class="bmd-label-floating">Largo</label>
+                           <p:inputText id="length" value="#{product.productsDTO.length}" styleClass="form-control camposPequeno"  required="true">
+                           <f:validateRegex pattern="^([0-9]{1,4})(\.[0-9]{1,2})?$"/>
+                           </p:inputText>
+                        </div>
+                        <p:message for="length"/>
+                        </div>
+                        
+                        
+                   <div class="col-sm-3">
+                       <div class="form-group">
+                          <label class="bmd-label-floating">Ancho</label>
+                           <p:inputText id="width" value="#{product.productsDTO.width}" styleClass="form-control camposPequeno"  required="true">
+                           <f:validateRegex pattern="^([0-9]{1,4})(\.[0-9]{1,2})?$"/>
+                           </p:inputText>
+                        </div>
+                        <p:message for="width"/>
+                        </div>
+                        
+                        
+                        
+              			<div class="col-sm-3">
+                       <div class="form-group">
+                          <label class="bmd-label-floating">Alto</label>
+                           <p:inputText id="height" value="#{product.productsDTO.height}" styleClass="form-control camposPequeno"  required="true">
+                           <f:validateRegex pattern="^([0-9]{1,4})(\.[0-9]{1,2})?$"/>
+                           </p:inputText>
+                        </div>
+                        <p:message for="height"/>
+                        </div>
+                        
+                        </div>      
+                 
+           <div class="row">
+           <div class="col-sm-3">
+                         <div class="form-group">
+                          <label class="bmd-label-floating">Artista</label>
+                          <div class="p-field p-col-12 p-md-4">
+				                <p:selectOneMenu id="artist" value="#{product.productsDTO.artists}" required="true"
+				                                panelStyle="width:200px" effect="fade" var="c" styleClass="camposPequeno"
+				                                filter="true" filterMatchMode="startsWith" converter="#{artistConverter}">
+				
+				                    <f:selectItems value="#{product.artists}" var="arts"
+				                                itemLabel="#{arts.firstname} #{arts.lastname}" itemValue="#{arts}"/>
+				
+				                  
+				                    <p:column>
+				                        <f:facet name="header">
+				                            <h:outputText value="Artista"/>
+				                        </f:facet>
+				                        <h:outputText value="#{c.firstname} #{c.lastname}"/>
+				                    </p:column>
+				                  
+				                </p:selectOneMenu>
+				            </div>
+                        </div>
+                        <p:message for="artist"/>
+                        </div>
+           		<div class="col-sm-3">
+                       <div class="form-group">
+                          <label class="bmd-label-floating">Precio</label>
+                           <p:inputText id="price" value="#{product.productsDTO.price}" styleClass="form-control camposPequeno"  required="true">
+                           <f:validateRegex pattern="^([0-9]{1,6})(\.[0-9]{1,2})?$"/>
+                           </p:inputText>
+                        </div>
+                        <p:message for="price"/>
+                        </div>
+                        
+                        
+                    <div class="col-sm-3">
+                       <div class="form-group">
+                          <label class="bmd-label-floating">Precio Consigna</label>
+                           <p:inputText id="priceConsign" value="#{product.productsDTO.priceConsign}" styleClass="form-control camposPequeno"  required="true">
+                           <f:validateRegex pattern="^([0-9]{1,6})(\.[0-9]{1,2})?$"/>
+                           </p:inputText>
+                        </div>
+                        <p:message for="priceConsign"/>
+                        </div>
+                        
+                              <div class="col-sm-3">
+                         <div class="form-group">
+                          <label class="bmd-label-floating">¿Es Anillo?</label>
+                           <p:selectOneMenu id="isRing" value="#{product.productsDTO.isRing}" required="true">
+		                    <f:selectItem itemLabel="Seleccione una" itemValue=""/>
+		                    <f:selectItem itemLabel="Sí" itemValue="true"/>
+                    		<f:selectItem itemLabel="No" itemValue="false"/>	
+                		</p:selectOneMenu>
+                        </div>
+                        <p:message for="isRing"/>
+                        </div>
+           </div>
+                  <div class="row">
+                     
+               			<div class="col-sm-4">
+                         <div class="form-group">
+                          <label class="bmd-label-floating">Creado</label><br/>
+                          <h:outputText value="#{product.productsDTO.created}" />
+                           <label class="bmd-label-floating">Actualizado</label><br/>
+                           <h:outputText value="#{product.productsDTO.updated}" />
+                        </div>
+                         
+                        </div>
+                        
+                        
+                       
+                        
+                        
+                         <div class="col-sm-2">
+                         <div class="form-group">
+                            <label class="bmd-label-floating">Visitados</label>
+                           <h:outputText value="#{product.productsDTO.visitors}" />
+                           <label class="bmd-label-floating">Comprados</label>
+                           <h:outputText value="#{product.productsDTO.purchased}" />
+                        </div>
+                         
+                        </div>
+                        
+                        
+                        <div class="col-sm-3">
+		                    <p:commandButton action="#{product.showPictures(product.productsDTO)}" styleClass="btn btn-primary" value="Editar Fotos" process="@this" immediate="true" oncomplete="removeDialogHeader(xhr, status, args);" >
+                  				<p:ajax event="dialogReturn" listener="#{product.onCloseDialog}" />
+                  				</p:commandButton>
+		                    <div class="clearfix"></div>
+		                    </div>
+		                    
+		            <div class="col-sm-3">
+		                    <p:commandButton action="#{product.showList(product.productsDTO)}" styleClass="btn btn-primary" value="Editar Contenido Producto" process="@this" immediate="true" oncomplete="removeDialogHeader(xhr, status, args);" >
+                  				<p:ajax event="dialogReturn" listener="#{product.onCloseDialog}"/>
+                  				</p:commandButton>
+		                    <div class="clearfix"></div>
+		                    </div>
+                   
+                   
+                   </div> 
+                   
+                  
+                        
+                  	<div class="col-sm-12">
+                  	  <div class="form-group">
+                          <label class="bmd-label-floating">Categorías</label><br/>
+                         <p:selectCheckboxMenu id="category" value="#{product.productsDTO.categories}" label="Categorías" style="min-width: 11rem"
+                                  multiple="true" required="true" filter="true" filterMatchMode="startsWith" panelStyle="width: 30rem" scrollHeight="250" >
+                			  <f:selectItems value="#{product.categories}" var="cat" itemLabel="#{cat.title}" itemValue="#{cat.idCategory}" />
+            			</p:selectCheckboxMenu>
+                        </div>
+                        <p:message for="category"/>
+                        </div>
+                  
+                   
+                                <div class="row">
+                    
+                    
+             
+                        
+                        
+                     
+                       
+                         
+                       
+                  </div>
+                  
+                  
+                    <div class="row">
+                
+	                    <div class="col-sm-9">
+		                    <div class="boton">
+		                    <p:commandButton styleClass="btn btn-primary pull-right" value="Cancelar" immediate="true" action="#{product.cancel}" />
+		                    <div class="clearfix"></div>
+		                    </div>
+		                    </div>
+		            		<div class="col-sm-3">
+		                    <div class="boton">
+		                    <p:commandButton styleClass="btn btn-primary pull-right" value="Guardar" update="form"  immediate="false" action="#{product.update}" />
+		                    <div class="clearfix"></div>
+		                    </div>
+		                    
+		                    
+	                    </div>
+	                    
+                   </div>
+   
+                     </h:form>
+                  </ui:define>
+ </ui:composition>
+</h:body>
+</html>
